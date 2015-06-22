@@ -7,4 +7,9 @@
     <string name="title_activity_login">LoginActivity</string>
     <string name="title_activity_contact_list">ContactListActivity</string>
     <string name="title_activity_contact_info">ContactInfoActivity</string>
+    <string name="title_activity_nfcmain">NFCMainActivity</string>
+
+
+    <string name="nfcinstructions">Tap on the buttons </string>
+
 </resources>

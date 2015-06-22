@@ -26,9 +26,11 @@ public class ContactListActivity extends Activity implements OnClickListener, Ad
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_list);
 
-        // initialize
+        // initialize all the buttons
         Button settingsButton = (Button)findViewById(R.id.settings_button);
         settingsButton.setOnClickListener(this);
+        Button EasyConnectButton = (Button)findViewById(R.id.easy_connect_button);
+        EasyConnectButton.setOnClickListener(this);
 
         contactsListView = (ListView)findViewById(R.id.contactslistView);
         List<String> dummyDataArray = new ArrayList<String>();
@@ -81,6 +83,12 @@ public class ContactListActivity extends Activity implements OnClickListener, Ad
             case R.id.settings_button: {
                 Intent intent = new Intent(this, LoginActivity.class);
                 startActivity(intent);
+                break;
+            }
+            case R.id.easy_connect_button: {
+                Intent i=new Intent();
+                i.setAction("launch.me.action.LAUNCH_IT");
+                startActivityForResult(i,0);
                 break;
             }
 

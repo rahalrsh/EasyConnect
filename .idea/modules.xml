@@ -4,6 +4,9 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/EasyConnect.iml" filepath="$PROJECT_DIR$/EasyConnect.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ndeftools/ndeftools.iml" filepath="$PROJECT_DIR$/ndeftools/ndeftools.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ndeftoolsboilerplate/ndeftoolsboilerplate.iml" filepath="$PROJECT_DIR$/ndeftoolsboilerplate/ndeftoolsboilerplate.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ndeftoolsutil/ndeftoolsutil.iml" filepath="$PROJECT_DIR$/ndeftoolsutil/ndeftoolsutil.iml" />
     </modules>
   </component>
 </project>
