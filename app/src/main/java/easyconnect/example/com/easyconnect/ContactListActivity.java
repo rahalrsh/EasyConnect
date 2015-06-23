@@ -9,14 +9,13 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.melnykov.fab.FloatingActionButton;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import at.markushi.ui.CircleButton;
 
 
 public class ContactListActivity extends Activity implements OnClickListener, AdapterView.OnItemClickListener{
@@ -29,15 +28,14 @@ public class ContactListActivity extends Activity implements OnClickListener, Ad
         setContentView(R.layout.activity_contact_list);
 
         // initialize all the buttons
-        Button settingsButton = (Button)findViewById(R.id.settings_button);
+        CircleButton settingsButton = (CircleButton)findViewById(R.id.settings_button);
         settingsButton.setOnClickListener(this);
 
 
         contactsListView = (ListView)findViewById(R.id.contactslistView);
 
         // this is the floating button
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.attachToListView(contactsListView);
+        CircleButton fab = (CircleButton) findViewById(R.id.fab);
         fab.setOnClickListener(this);
 
         List<String> dummyDataArray = new ArrayList<String>();
@@ -51,6 +49,22 @@ public class ContactListActivity extends Activity implements OnClickListener, Ad
         dummyDataArray.add("Putin");
         dummyDataArray.add("Iron man");
         dummyDataArray.add("Bat man");
+        dummyDataArray.add("Rahal2");
+        dummyDataArray.add("Nisal2");
+        dummyDataArray.add("Bharath2");
+        dummyDataArray.add("Moataz2");
+        dummyDataArray.add("Obama2");
+        dummyDataArray.add("Putin2");
+        dummyDataArray.add("Iron man2");
+        dummyDataArray.add("Bat man2");
+        dummyDataArray.add("Rahal3");
+        dummyDataArray.add("Nisal4");
+        dummyDataArray.add("Bharath5");
+        dummyDataArray.add("Moataz6");
+        dummyDataArray.add("Obama7");
+        dummyDataArray.add("Putin8");
+        dummyDataArray.add("Iron man9");
+        dummyDataArray.add("Bat man0");
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
                 this,
