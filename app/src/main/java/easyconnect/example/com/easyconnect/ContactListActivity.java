@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.melnykov.fab.FloatingActionButton;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,10 +31,15 @@ public class ContactListActivity extends Activity implements OnClickListener, Ad
         // initialize all the buttons
         Button settingsButton = (Button)findViewById(R.id.settings_button);
         settingsButton.setOnClickListener(this);
-        Button EasyConnectButton = (Button)findViewById(R.id.easy_connect_button);
-        EasyConnectButton.setOnClickListener(this);
+
 
         contactsListView = (ListView)findViewById(R.id.contactslistView);
+
+        // this is the floating button
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.attachToListView(contactsListView);
+        fab.setOnClickListener(this);
+
         List<String> dummyDataArray = new ArrayList<String>();
         //TODO: How and where do we sort the names alphabetically?
         dummyDataArray.add("Me");
@@ -85,7 +92,7 @@ public class ContactListActivity extends Activity implements OnClickListener, Ad
                 startActivity(intent);
                 break;
             }
-            case R.id.easy_connect_button: {
+            case R.id.fab: {
                 Intent i=new Intent();
                 i.setAction("launch.me.action.LAUNCH_IT");
                 startActivityForResult(i,0);
