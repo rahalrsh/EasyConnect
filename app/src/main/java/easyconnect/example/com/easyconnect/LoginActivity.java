@@ -29,7 +29,8 @@ public class LoginActivity extends Activity implements View.OnClickListener{
         CircleButton next = (CircleButton)findViewById(R.id.next);
         next.setOnClickListener(this);
         // do the same for the linkedinLoginButton and the other buttons
-
+        int i;
+        //test
         // need logic to set 'isLoggedIn'
         Toast.makeText(getApplicationContext(), "need logic to check if user is already logged in to a social media site", Toast.LENGTH_LONG).show();
         isLoggedIn = false;
