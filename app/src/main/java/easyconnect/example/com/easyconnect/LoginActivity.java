@@ -3,6 +3,7 @@ package easyconnect.example.com.easyconnect;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,7 +14,7 @@ import android.widget.Toast;
 import at.markushi.ui.CircleButton;
 
 
-public class LoginActivity extends Activity implements View.OnClickListener{
+public class LoginActivity extends FragmentActivity implements View.OnClickListener{
 
     boolean isLoggedIn;
 

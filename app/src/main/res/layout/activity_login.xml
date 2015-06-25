@@ -12,12 +12,21 @@
         android:layout_height="wrap_content"
         android:id="@+id/textView" />
 
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools" android:id="@+id/fragment"
+        android:name="easyconnect.example.com.easyconnect.FBFragment"
+        tools:layout="@layout/fragment_fb" android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/login_button"
+        />
+
+
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/facebookLoginButton"
         android:src="@drawable/facebook_login_button_icon"
-        android:layout_below="@+id/textView"
+        android:layout_below="@+id/next"
         android:layout_alignParentStart="true"
         android:layout_marginTop="113dp" />
 

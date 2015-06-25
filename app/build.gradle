@@ -4,6 +4,10 @@ android {
     compileSdkVersion 22
     buildToolsVersion "22.0.1"
 
+    repositories {
+        mavenCentral()
+    }
+
     defaultConfig {
         applicationId "easyconnect.example.com.easyconnect"
         minSdkVersion 21
@@ -20,9 +24,9 @@ android {
 }
 
 dependencies {
-
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(':ndeftoolsboilerplate')
     compile 'com.android.support:appcompat-v7:21.0.+'
     compile 'com.github.markushi:circlebutton:1.1'
+    compile 'com.facebook.android:facebook-android-sdk:4.1.0'
 }
