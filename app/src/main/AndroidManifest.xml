@@ -3,6 +3,7 @@
     package="easyconnect.example.com.easyconnect" >
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -38,6 +39,10 @@
         <activity
             android:name=".ContactInfoActivity"
             android:label="@string/title_activity_contact_info" >
+        </activity>
+        <activity
+            android:name=".ConfirmInfoActivity"
+            android:label="@string/title_activity_confirm_info" >
         </activity>
     </application>
 

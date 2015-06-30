@@ -3,6 +3,6 @@
     <style name="AppTheme" parent="android:Theme.Material.Light">
         <item name="android:colorPrimary">#009688</item>
         <item name="android:colorPrimaryDark">#00796B</item>
-        <item name="android:colorAccent">#F44336</item>
+        <item name="android:colorAccent">#009688</item>
     </style>
 </resources>

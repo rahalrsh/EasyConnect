@@ -1,6 +1,5 @@
 package easyconnect.example.com.easyconnect;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -34,7 +33,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
         //test
         // need logic to set 'isLoggedIn'
         Toast.makeText(getApplicationContext(), "need logic to check if user is already logged in to a social media site", Toast.LENGTH_LONG).show();
-        isLoggedIn = false;
+        isLoggedIn = true;
     }
 
     @Override
@@ -71,7 +70,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
 
             case R.id.next:{
                 if (isLoggedIn){
-                    Intent intent = new Intent(this, ContactListActivity.class);
+                    Intent intent = new Intent(this, ConfirmInfoActivity.class);
                     startActivity(intent);
                 }
                 else{
