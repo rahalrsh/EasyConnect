@@ -5,3 +5,8 @@
 .DS_Store
 /build
 /captures
+/ndeftools/build/
+/ndeftoolsutil/build/
+/ndeftoolsboilerplate/build/
+
+

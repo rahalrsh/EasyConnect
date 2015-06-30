@@ -42,7 +42,8 @@
         </activity>
         <activity
             android:name=".ConfirmInfoActivity"
-            android:label="@string/title_activity_confirm_info" >
+            android:label="@string/title_activity_confirm_info"
+            android:windowSoftInputMode="stateHidden">
         </activity>
     </application>
 

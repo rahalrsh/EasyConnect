@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.Toast;
 
 import at.markushi.ui.CircleButton;
@@ -23,8 +22,9 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
         setContentView(R.layout.activity_login);
 
         // Initialize
-        ImageButton facebookLoginButton = (ImageButton)findViewById(R.id.facebookLoginButton);
-        facebookLoginButton.setOnClickListener(this);
+        // this was replaced by bharath
+        //ImageButton facebookLoginButton = (ImageButton)findViewById(R.id.facebookLoginButton);
+        //facebookLoginButton.setOnClickListener(this);
 
         CircleButton next = (CircleButton)findViewById(R.id.next);
         next.setOnClickListener(this);
@@ -61,12 +61,12 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.facebookLoginButton: {
+            /*case R.id.facebookLoginButton: {
                 Log.i("LoginActivity","facebookLoginButton clicked");
                 Toast.makeText(getApplicationContext(), "logged in with facebook successful ", Toast.LENGTH_SHORT).show();
                 isLoggedIn = true;
                 break;
-            }
+            }*/ // bharath need to add the new logic
 
             case R.id.next:{
                 if (isLoggedIn){
