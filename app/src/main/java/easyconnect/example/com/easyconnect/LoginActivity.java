@@ -1,6 +1,7 @@
 package easyconnect.example.com.easyconnect;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -15,6 +16,7 @@ import at.markushi.ui.CircleButton;
 public class LoginActivity extends FragmentActivity implements View.OnClickListener{
 
     boolean isLoggedIn;
+    DBHandler dbHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,8 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
         // need logic to set 'isLoggedIn'
         Toast.makeText(getApplicationContext(), "need logic to check if user is already logged in to a social media site", Toast.LENGTH_LONG).show();
         isLoggedIn = true;
+
+        dbHandler = new DBHandler(getBaseContext());
     }
 
     @Override
@@ -70,6 +74,28 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
 
             case R.id.next:{
                 if (isLoggedIn){
+
+                    // insert data that we pulled from social media to the database
+                    dbHandler.open();
+                    long id = dbHandler.insertData("David", "david123@gmail.com");
+                    Toast.makeText(getBaseContext(), "Data inserted to database", Toast.LENGTH_LONG).show();
+                    Log.i("LoginActivity","Data inserted to database");
+                    dbHandler.close();
+
+
+                    // retrieve data from database
+                    dbHandler.open();
+                    Cursor c = dbHandler.returnData();
+                    if (c.moveToFirst()){ // if cursor move to first that means there are some data
+                        do{
+                            Log.i ("LoginActivity","Name: "+ c.getString(0));
+                            Log.i ("LoginActivity","Email: "+ c.getString(1));
+
+                        }while (c.moveToNext());
+                    }
+                    dbHandler.close();
+
+
                     Intent intent = new Intent(this, ConfirmInfoActivity.class);
                     startActivity(intent);
                 }
