@@ -1,0 +1,186 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="easyconnect.example.com.easyconnect.ContactInfoActivity"
+    android:id="@+id/kk">
+
+    <GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/gridLayout"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true">
+
+        <TextView
+            android:layout_width="279dp"
+            android:layout_height="67dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="DR.Evil"
+            android:id="@+id/textView8"
+            android:layout_row="1"
+            android:layout_column="0"
+            android:textAlignment="center"
+            android:gravity="center_horizontal|fill_vertical"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:layout_width="181dp"
+            android:layout_height="212dp"
+            android:id="@+id/imageView2"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:src="@drawable/austin"
+            android:layout_gravity="center|fill" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:ems="10"
+            android:id="@+id/editText"
+            android:layout_row="2"
+            android:layout_column="0"
+            android:text="Phone"
+            android:textSize="20dp"
+            android:textIsSelectable="true" />
+
+        <TextView
+            android:layout_width="279dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="514-220-8630"
+            android:id="@+id/textView3"
+            android:layout_row="3"
+            android:layout_column="0"
+            android:textAlignment="textStart"
+            android:enabled="true"
+            android:autoLink="phone"
+            android:textColorLink="@color/link_text_material_light" />
+
+        <TextView
+            android:layout_width="279dp"
+            android:layout_height="37dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/textView4"
+            android:layout_row="4"
+            android:layout_column="0"
+            android:textAlignment="center"
+
+            android:text="Mobile"
+            android:textColor="@color/abc_secondary_text_material_light" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="none|textEmailAddress"
+            android:ems="10"
+            android:id="@+id/editText2"
+            android:layout_row="5"
+            android:layout_column="0"
+            android:text="Email"
+            android:textSize="20dp"
+            android:textIsSelectable="true" />
+
+        <TextView
+            android:layout_width="279dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="moataz.elbarkouky@mail.utoronto.ca"
+            android:id="@+id/textView2"
+            android:layout_row="6"
+            android:layout_column="0"
+            android:textAlignment="textStart"
+            android:autoLink="email" />
+
+        <TextView
+            android:layout_width="279dp"
+            android:layout_height="37dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Home"
+            android:id="@+id/textView5"
+            android:layout_row="7"
+            android:layout_column="0"
+            android:textAlignment="center"
+            android:textColor="@color/abc_secondary_text_material_light" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:ems="10"
+            android:id="@+id/editText3"
+            android:layout_row="8"
+            android:layout_column="0"
+            android:text="Address"
+            android:textSize="20dp"
+            android:textIsSelectable="true" />
+
+        <TextView
+            android:layout_width="279dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="50 rue Berlioz nuns island"
+            android:id="@+id/textView6"
+            android:layout_row="9"
+            android:layout_column="0"
+            android:textAlignment="textStart" />
+
+        <TextView
+            android:layout_width="279dp"
+            android:layout_height="37dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Home"
+            android:id="@+id/textView7"
+            android:layout_row="10"
+            android:layout_column="0"
+            android:textAlignment="center"
+            android:textColor="@color/abc_secondary_text_material_light" />
+
+    </GridLayout>
+
+    <GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/gridLayout"
+        android:id="@+id/gridLayout2"></GridLayout>
+
+    <GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="63dp"
+            android:id="@+id/imageView"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:src="@drawable/twitter_icon"
+            android:layout_gravity="right"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" />
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="63dp"
+            android:id="@+id/imageView3"
+            android:layout_row="1"
+            android:layout_column="0"
+            android:src="@drawable/social_facebook_box_blue" />
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="63dp"
+            android:id="@+id/imageView4"
+            android:layout_row="2"
+            android:layout_column="0"
+            android:src="@drawable/linkedin" />
+
+    </GridLayout>
+
+</RelativeLayout>

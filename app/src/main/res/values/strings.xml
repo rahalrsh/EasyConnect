@@ -8,6 +8,9 @@
     <string name="title_activity_contact_list">ContactListActivity</string>
     <string name="title_activity_contact_info">ContactInfoActivity</string>
     <string name="title_activity_nfcmain">NFCMainActivity</string>
+    <string name="are_you_sure">Go to this website</string>
+    <string name="fire">Go</string>
+    <string name="cancel">cancel</string>
     <string name="app_id">453861658129318</string>
 
 
@@ -16,5 +19,8 @@
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_confirm_info">confirmInfoActivity</string>
+    <string name="phone_title">Phone</string>
+    <string name="email_title">Email</string>
+    <string name="address_title">Address</string>
 
 </resources>
