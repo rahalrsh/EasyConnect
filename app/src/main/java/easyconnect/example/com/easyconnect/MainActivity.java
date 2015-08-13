@@ -3,7 +3,6 @@ package easyconnect.example.com.easyconnect;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 /**
 This is the first Activity that starts when we open the app
@@ -44,10 +43,6 @@ public class MainActivity extends Activity {
 
         // start a new activity
         startActivity(intent);
-
-        // How to log
-        Log.e("at MainActivity", "this is an error log");
-        Log.w("at MainActivity", "this is a warning");
 
         // finish this activity
         finish();

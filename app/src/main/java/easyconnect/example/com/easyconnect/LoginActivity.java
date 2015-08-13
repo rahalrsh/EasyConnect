@@ -77,7 +77,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
 
                     // insert data that we pulled from social media to the database
                     dbHandler.open();
-                    long id = dbHandler.insertData("David", "david123@gmail.com");
+                    long id = dbHandler.insertData("Barak", "Obama", "barak123@gmail.com", "647-123-4567", "U.S federal government", 12345, "fb.com/obama", 45467, "twitter.com/B.Obama");
                     Toast.makeText(getBaseContext(), "Data inserted to database", Toast.LENGTH_LONG).show();
                     Log.i("LoginActivity","Data inserted to database");
                     dbHandler.close();
@@ -88,8 +88,12 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
                     Cursor c = dbHandler.returnData();
                     if (c.moveToFirst()){ // if cursor move to first that means there are some data
                         do{
-                            Log.i ("LoginActivity","Name: "+ c.getString(0));
-                            Log.i ("LoginActivity","Email: "+ c.getString(1));
+                            Log.i ("LoginActivity", "UserID: "+ c.getInt(0));
+                            Log.i ("LoginActivity","Name: "+ c.getString(1));
+                            Log.i ("LoginActivity","Email: "+ c.getString(3));
+                            Log.i ("LoginActivity", "fb UID: "+ c.getInt(6));
+                            Log.i ("------", "------");
+
 
                         }while (c.moveToNext());
                     }

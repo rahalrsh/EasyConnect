@@ -1,29 +1,18 @@
 package easyconnect.example.com.easyconnect;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Button;
-import android.database.Cursor;
-import android.app.AlertDialog;
-import android.net.Uri;
-
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class ContactInfoActivity extends Activity implements OnClickListener{
@@ -49,7 +38,7 @@ public class ContactInfoActivity extends Activity implements OnClickListener{
         String email = "n/a";
         DBHandler MyDataBaseHandler = new  DBHandler(this);
         MyDataBaseHandler = MyDataBaseHandler.open();
-        String query = "Select "+MyDataBaseHandler.EMAIL +" FROM "+ MyDataBaseHandler.TABLE_NAME +" WHERE "+MyDataBaseHandler.NAME+" LIKE 'evil'";
+        String query = "Select "+MyDataBaseHandler.EMAIL +" FROM "+ MyDataBaseHandler.TABLE_NAME +" WHERE "+MyDataBaseHandler.FIRST_NAME+" LIKE 'evil'";
         Cursor c = MyDataBaseHandler.db.rawQuery(query,null);
         c.moveToFirst();
 
@@ -89,7 +78,7 @@ public class ContactInfoActivity extends Activity implements OnClickListener{
     {
         DBHandler MyDataBaseHandler = new  DBHandler(this);
         MyDataBaseHandler = MyDataBaseHandler.open();
-        MyDataBaseHandler.insertData("evil","drEvil@gmail.com");
+        MyDataBaseHandler.insertData("evil", "last name","drEvil@gmail.com", "647-222-4567", "Evil Company", 1234567, "fb.com/DR.Evil", 454673, "twitter.com/D.Evil");
         MyDataBaseHandler.close();
     }
 
