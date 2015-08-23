@@ -7,11 +7,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.facebook.login.widget.ProfilePictureView;
 
 import at.markushi.ui.CircleButton;
 
 
 public class ConfirmInfoActivity extends Activity implements View.OnClickListener{
+
+    private ProfilePictureView profilepic;
 
     private ListView contactsListView;
 
@@ -20,6 +26,19 @@ public class ConfirmInfoActivity extends Activity implements View.OnClickListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirm_info);
 
+        setContentView(R.layout.activity_confirm_info);
+        profilepic = (ProfilePictureView) findViewById(R.id.fb_profile_pic);
+
+        Intent loginIntent = getIntent();
+        Bundle extras = loginIntent.getExtras();
+        if (extras != null) {
+
+            TextView FBFirstNametextview = (TextView) findViewById(R.id.FBFirstName);
+            FBFirstNametextview.setText(extras.getString("FBFirstName"));
+            TextView FBLastNametextview = (TextView) findViewById(R.id.FBLastName);
+            FBLastNametextview.setText(extras.getString("FBLastName"));
+            profilepic.setProfileId(extras.getString("FBProfileID"));
+        }
 
         CircleButton settingsButton = (CircleButton) findViewById(R.id.confirm_profile_button);
         settingsButton.setOnClickListener(this);

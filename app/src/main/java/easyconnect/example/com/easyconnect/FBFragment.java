@@ -35,6 +35,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
@@ -46,6 +47,7 @@ import com.facebook.Profile;
 import com.facebook.ProfileTracker;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.facebook.login.widget.ProfilePictureView;
 
 
 /**
@@ -56,6 +58,8 @@ public class FBFragment extends Fragment {
     public FBFragment() {
     }
 
+    private ProfilePictureView profilepic;
+
     private CallbackManager mCallbackManager;
     private TextView mTextDetails;
     private TextView profile_link;
@@ -63,13 +67,21 @@ public class FBFragment extends Fragment {
     private AccessTokenTracker mTokenTracker;
     private ProfileTracker mProfileTracker;
 
-    private void displayWelcomeMessage(Profile profile){
+    private Intent displayWelcomeMessage(Profile profile){
+        Intent intent = getActivity().getIntent();
         if(profile!=null) {
-            mTextDetails.setText("Welcome " + profile.getName()+ "\n" + profile.getId());
+            String FBName =profile.getName();
+            mTextDetails.setText("Welcome " + FBName + profile.getId());
             profile_link.setText(
                     Html.fromHtml(
-                            "<a href=\"" + profile.getLinkUri() +"\">See "+profile.getFirstName() +"'s profile</a> "));
+                            "<a href=\"" + profile.getLinkUri() + "\">See " + profile.getFirstName() + "'s profile</a> "));
+            intent.putExtra("FBFirstName", profile.getFirstName());
+            intent.putExtra("FBLastName", profile.getLastName());
+            intent.putExtra("FBProfileID", profile.getId());
+
+            profilepic.setProfileId(profile.getId());
         }
+        return intent;
     }
 
     private FacebookCallback<LoginResult> mCallback=new FacebookCallback<LoginResult>() {
@@ -77,18 +89,21 @@ public class FBFragment extends Fragment {
         public void onSuccess(LoginResult loginResult) {
             AccessToken accessToken= loginResult.getAccessToken();
             Profile profile = Profile.getCurrentProfile();
-            displayWelcomeMessage(profile);
+            Intent intent = displayWelcomeMessage(profile);
+            Toast.makeText(getActivity(), "Login to Facebook was successful", Toast.LENGTH_SHORT).show();
+
+
+            startActivity(intent);
 
         }
 
         @Override
         public void onCancel() {
-
         }
 
         @Override
         public void onError(FacebookException e) {
-
+            Toast.makeText(getActivity(), "Login to Facebook was not successful", Toast.LENGTH_SHORT).show();
         }
     };
 
@@ -125,10 +140,11 @@ public class FBFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         LoginButton loginButton = (LoginButton) view.findViewById(R.id.login_button);
-        loginButton.setReadPermissions("user_friends");
+        loginButton.setReadPermissions("user_friends", "email", "user_location","user_likes");
         loginButton.setFragment(this);
         loginButton.registerCallback(mCallbackManager, mCallback);
 
+        profilepic = (ProfilePictureView) view.findViewById(R.id.profile_pic);
         mTextDetails = (TextView)view.findViewById(R.id.text_details);
         profile_link =(TextView)view.findViewById(R.id.profile_link);
         profile_link.setMovementMethod(LinkMovementMethod.getInstance());

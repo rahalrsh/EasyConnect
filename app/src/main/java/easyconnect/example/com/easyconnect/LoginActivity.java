@@ -98,10 +98,21 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
                         }while (c.moveToNext());
                     }
                     dbHandler.close();
+                    Intent CofirmInfoIntent = new Intent(this, ConfirmInfoActivity.class);
 
-
-                    Intent intent = new Intent(this, ConfirmInfoActivity.class);
-                    startActivity(intent);
+                    Intent loginIntent = getIntent();
+                    Bundle extras = loginIntent.getExtras();
+                    if (extras != null) {
+                            String fbFirstName = extras.getString("FBFirstName");
+                            CofirmInfoIntent.putExtra("FBFirstName", fbFirstName);
+                            CofirmInfoIntent.putExtra("FBLastName", extras.getString("FBLastName"));
+                            CofirmInfoIntent.putExtra("FBProfileID", extras.getString("FBProfileID"));
+                            //Toast.makeText(getBaseContext(), "Message is" + fbFirstName, Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        Toast.makeText(getApplicationContext(), "sorry you need to login first", Toast.LENGTH_SHORT).show();
+                    }
+                    startActivity(CofirmInfoIntent);
                 }
                 else{
                     Toast.makeText(getApplicationContext(), "sorry you need to login first", Toast.LENGTH_SHORT).show();
@@ -109,7 +120,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
 
             }
             default:{
-                Log.i("LoginActivity","nothing");
+                Log.i("LoginActivity", "nothing");
             }
         }
 
