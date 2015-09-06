@@ -1,5 +1,6 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:circle="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
     <!-- Here you put the rest of your current view-->
@@ -187,6 +188,7 @@
             android:id="@+id/nfcConnect"
             android:layout_width="64dip"
             android:layout_height="64dip"
+            circle:cb_color="#00796B"
             android:layout_gravity="bottom|left"
             android:src="@drawable/find_person_icon"
             android:layout_marginTop="59dp"

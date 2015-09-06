@@ -3,7 +3,6 @@
     xmlns:circle="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
@@ -25,7 +24,7 @@
         android:layout_width="64dip"
         android:layout_height="64dip"
         android:src="@drawable/check_icon"
-        circle:cb_color="#99CC00"
+        circle:cb_color="#00796B"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true" />
 
