@@ -14,6 +14,7 @@
         android:id="@+id/my_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:overScrollMode="never"
         android:scrollbars="vertical" />
 
     <LinearLayout
@@ -25,22 +26,26 @@
         android:layout_alignParentEnd="true">
 
 
-        <at.markushi.ui.CircleButton
+        <android.support.design.widget.FloatingActionButton
             android:id="@+id/contacts_button"
             android:layout_width="match_parent"
             android:layout_height="64dip"
-            circle:cb_color="#00796B"
+            android:elevation="10dp"
+            circle:backgroundTint="#009688"
+            android:propertyName="translationZ"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_gravity="bottom|right"
             android:layout_marginBottom="8dip"
             android:src="@drawable/settings_icon" />
 
-        <at.markushi.ui.CircleButton
+        <android.support.design.widget.FloatingActionButton
             android:id="@+id/messages_button"
             android:layout_width="64dip"
             android:layout_height="64dip"
-            circle:cb_color="#00796B"
+            android:elevation="10dp"
+            circle:backgroundTint="#009688"
+            android:propertyName="translationZ"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_gravity="bottom|right"

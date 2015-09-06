@@ -58,7 +58,7 @@
             android:textAlignment="textStart"
             android:enabled="true"
             android:autoLink="phone"
-            android:textColorLink="@color/link_text_material_light" />
+            />
 
         <TextView
             android:layout_width="279dp"

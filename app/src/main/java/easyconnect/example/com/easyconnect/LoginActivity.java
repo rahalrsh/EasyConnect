@@ -3,14 +3,13 @@ package easyconnect.example.com.easyconnect;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
-
-import at.markushi.ui.CircleButton;
 
 
 public class LoginActivity extends FragmentActivity implements View.OnClickListener{
@@ -28,7 +27,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
         //ImageButton facebookLoginButton = (ImageButton)findViewById(R.id.facebookLoginButton);
         //facebookLoginButton.setOnClickListener(this);
 
-        CircleButton next = (CircleButton)findViewById(R.id.next);
+        FloatingActionButton next = (FloatingActionButton)findViewById(R.id.next);
         next.setOnClickListener(this);
         // do the same for the linkedinLoginButton and the other buttons
         int i;

@@ -2,7 +2,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:circle="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent"
+    android:overScrollMode="never">
     <!-- Here you put the rest of your current view-->
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
@@ -65,7 +66,6 @@
                 android:textAlignment="textStart"
                 android:enabled="true"
                 android:autoLink="phone"
-                android:textColorLink="@color/link_text_material_light"
                 android:layout_marginBottom="5dp"
                 android:drawableBottom="@android:color/black"/>
 
@@ -184,11 +184,11 @@
         </GridLayout>
 
 
-        <at.markushi.ui.CircleButton
+        <android.support.design.widget.FloatingActionButton
             android:id="@+id/nfcConnect"
             android:layout_width="64dip"
             android:layout_height="64dip"
-            circle:cb_color="#00796B"
+            circle:backgroundTint="#009688"
             android:layout_gravity="bottom|left"
             android:src="@drawable/find_person_icon"
             android:layout_marginTop="59dp"

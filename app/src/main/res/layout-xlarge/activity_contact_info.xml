@@ -57,8 +57,7 @@
             android:layout_column="0"
             android:textAlignment="textStart"
             android:enabled="true"
-            android:autoLink="phone"
-            android:textColorLink="@color/link_text_material_light" />
+            android:autoLink="phone" />
 
         <TextView
             android:layout_width="279dp"
@@ -70,7 +69,7 @@
             android:textAlignment="center"
 
             android:text="Mobile"
-            android:textColor="@color/abc_secondary_text_material_light" />
+            />
 
         <EditText
             android:layout_width="wrap_content"
@@ -104,7 +103,7 @@
             android:layout_row="7"
             android:layout_column="0"
             android:textAlignment="center"
-            android:textColor="@color/abc_secondary_text_material_light" />
+             />
 
         <EditText
             android:layout_width="wrap_content"
@@ -137,7 +136,7 @@
             android:layout_row="10"
             android:layout_column="0"
             android:textAlignment="center"
-            android:textColor="@color/abc_secondary_text_material_light" />
+             />
 
     </GridLayout>
 

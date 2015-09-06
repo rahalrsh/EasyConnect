@@ -4,6 +4,7 @@ package easyconnect.example.com.easyconnect;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -11,7 +12,6 @@ import android.view.View;
 
 import java.util.ArrayList;
 
-import at.markushi.ui.CircleButton;
 
 
 public class ContactListActivity extends Activity implements View.OnClickListener{
@@ -40,7 +40,7 @@ public class ContactListActivity extends Activity implements View.OnClickListene
         //((MyRecyclerViewAdapter) mAdapter).deleteItem(index);
 
         // initialize all the buttons
-        CircleButton settingsButton = (CircleButton)findViewById(R.id.contacts_button);
+        FloatingActionButton settingsButton = (FloatingActionButton)findViewById(R.id.contacts_button);
         settingsButton.setOnClickListener(this);
 
 

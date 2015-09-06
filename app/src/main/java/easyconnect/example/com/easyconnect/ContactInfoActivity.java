@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,7 +15,7 @@ import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import at.markushi.ui.CircleButton;
+
 
 
 public class ContactInfoActivity extends Activity implements OnClickListener {
@@ -34,7 +35,7 @@ public class ContactInfoActivity extends Activity implements OnClickListener {
         setContentView(R.layout.activity_contact_info);
 
         // moving nfc to detailed contact page
-        CircleButton nfcConnect = (CircleButton) findViewById(R.id.nfcConnect);
+        FloatingActionButton nfcConnect = (FloatingActionButton) findViewById(R.id.nfcConnect);
         nfcConnect.setOnClickListener(this);
 
 

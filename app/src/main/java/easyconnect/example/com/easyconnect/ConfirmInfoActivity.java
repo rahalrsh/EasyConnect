@@ -3,23 +3,20 @@ package easyconnect.example.com.easyconnect;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.facebook.login.widget.ProfilePictureView;
 
-import at.markushi.ui.CircleButton;
 
 
 public class ConfirmInfoActivity extends Activity implements View.OnClickListener{
 
     private ProfilePictureView profilepic;
 
-    private ListView contactsListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +37,7 @@ public class ConfirmInfoActivity extends Activity implements View.OnClickListene
             profilepic.setProfileId(extras.getString("FBProfileID"));
         }
 
-        CircleButton settingsButton = (CircleButton) findViewById(R.id.confirm_profile_button);
+        FloatingActionButton settingsButton = (FloatingActionButton) findViewById(R.id.confirm_profile_button);
         settingsButton.setOnClickListener(this);
 
     }

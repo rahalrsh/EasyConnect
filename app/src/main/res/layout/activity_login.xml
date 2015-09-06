@@ -18,14 +18,22 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
+    <LinearLayout
 
-    <at.markushi.ui.CircleButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true">
+
+    <android.support.design.widget.FloatingActionButton
         android:id="@+id/next"
         android:layout_width="64dip"
         android:layout_height="64dip"
+        circle:backgroundTint="#009688"
         android:src="@drawable/check_icon"
-        circle:cb_color="#00796B"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true" />
+        android:elevation="10dp"
+   />
+    </LinearLayout>
 
 </RelativeLayout>
