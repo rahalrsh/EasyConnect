@@ -26,7 +26,7 @@
 
 
         <at.markushi.ui.CircleButton
-            android:id="@+id/settings_button"
+            android:id="@+id/contacts_button"
             android:layout_width="match_parent"
             android:layout_height="64dip"
             android:layout_alignParentBottom="true"
@@ -34,16 +34,6 @@
             android:layout_gravity="bottom|right"
             android:layout_marginBottom="8dip"
             android:src="@drawable/settings_icon" />
-
-        <at.markushi.ui.CircleButton
-            android:id="@+id/contacts_button"
-            android:layout_width="64dip"
-            android:layout_height="64dip"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_gravity="bottom|right"
-            android:layout_marginBottom="8dip"
-            android:src="@drawable/contacts_icon" />
 
         <at.markushi.ui.CircleButton
             android:id="@+id/messages_button"
@@ -55,15 +45,16 @@
             android:layout_marginBottom="8dip"
             android:src="@drawable/messages_icon" />
 
-        <at.markushi.ui.CircleButton
-            android:id="@+id/nfcConnect"
-            android:layout_width="64dip"
-            android:layout_height="64dip"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_gravity="bottom|right"
-            android:layout_marginBottom="8dip"
-            android:src="@drawable/find_person_icon" />
+        <!-- comment for now
+      <at.markushi.ui.CircleButton
+          android:id="@+id/settings_button"
+          android:layout_width="64dip"
+          android:layout_height="64dip"
+          android:layout_alignParentBottom="true"
+          android:layout_centerHorizontal="true"
+          android:layout_gravity="bottom|right"
+          android:layout_marginBottom="8dip"
+          android:src="@drawable/contacts_icon" /> -->
 
     </LinearLayout>
 </RelativeLayout>

@@ -142,24 +142,14 @@
                 android:autoLink="email"
                 android:layout_marginBottom="5dp" />
 
-            <TextView
-                android:layout_width="279dp"
-                android:layout_height="37dp"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:id="@+id/textView11"
-                android:layout_row="11"
-                android:layout_column="0"
-                android:textAlignment="center"
-                android:text="Home"
-                android:textColor="@color/switch_thumb_normal_material_dark" />
-
         </GridLayout>
 
         <GridLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true">
+            android:layout_alignParentStart="true"
+            android:id="@+id/gridLayout2">
 
             <ImageView
                 android:layout_width="40dp"
@@ -191,6 +181,17 @@
                 android:layout_gravity="left" />
 
         </GridLayout>
+
+
+        <at.markushi.ui.CircleButton
+            android:id="@+id/nfcConnect"
+            android:layout_width="64dip"
+            android:layout_height="64dip"
+            android:layout_gravity="bottom|left"
+            android:src="@drawable/find_person_icon"
+            android:layout_marginTop="59dp"
+            android:layout_below="@+id/gridLayout2"
+            android:layout_toStartOf="@+id/gridLayout" />
 
     </RelativeLayout>
 

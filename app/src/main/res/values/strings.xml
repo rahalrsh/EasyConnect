@@ -2,12 +2,13 @@
     <string name="app_name">EasyConnect</string>
 
     <string name="hello_world">Hello world!</string>
-    <string name="login_activity">Login Activity!</string>
+    <string name="login_activity">Login</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_login">LoginActivity</string>
-    <string name="title_activity_contact_list">ContactListActivity</string>
-    <string name="title_activity_contact_info">ContactInfoActivity</string>
-    <string name="title_activity_nfcmain">NFCMainActivity</string>
+    <string name="title_activity_login">Login</string>
+    <string name="title_activity_confirm_info">Confirm Personal Info</string>
+    <string name="title_activity_contact_list">Your Contacts List</string>
+    <string name="title_activity_contact_info">Detailed Contact Info</string>
+    <string name="title_activity_nfcmain">NFC Connect</string>
     <string name="are_you_sure">Go to this website</string>
     <string name="fire">Go</string>
     <string name="cancel">cancel</string>
@@ -16,9 +17,8 @@
 
     <string name="nfcinstructions">Tap on the buttons </string>
 
-<!-- TODO: Remove or change this placeholder text -->
+    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_confirm_info">confirmInfoActivity</string>
     <string name="phone_title">Phone</string>
     <string name="email_title">Email</string>
     <string name="address_title">Address</string>

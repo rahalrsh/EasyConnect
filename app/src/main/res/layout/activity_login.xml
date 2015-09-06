@@ -10,45 +10,23 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="easyconnect.example.com.easyconnect.LoginActivity">
 
-    <TextView android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView" />
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools" android:id="@+id/fragment"
         android:name="easyconnect.example.com.easyconnect.FBFragment"
         tools:layout="@layout/fragment_fb" android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/login_button"
-        />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
-
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/facebookLoginButton"
-        android:src="@drawable/facebook_login_button_icon"
-        android:layout_below="@+id/next"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="113dp" />
-
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/linkedinLoginButton"
-        android:src="@drawable/linkedin_login_button_icon"
-        android:layout_below="@+id/facebookLoginButton"
-        android:layout_alignParentStart="true" />
 
     <at.markushi.ui.CircleButton
         android:id="@+id/next"
-        android:layout_width="match_parent"
+        android:layout_width="64dip"
         android:layout_height="64dip"
-        android:layout_marginBottom="8dip"
         android:src="@drawable/check_icon"
+        circle:cb_color="#99CC00"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        circle:cb_color="#99CC00" />
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

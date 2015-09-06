@@ -40,11 +40,10 @@ public class ContactListActivity extends Activity implements View.OnClickListene
         //((MyRecyclerViewAdapter) mAdapter).deleteItem(index);
 
         // initialize all the buttons
-        CircleButton settingsButton = (CircleButton)findViewById(R.id.settings_button);
+        CircleButton settingsButton = (CircleButton)findViewById(R.id.contacts_button);
         settingsButton.setOnClickListener(this);
 
-        CircleButton nfcConnect = (CircleButton) findViewById(R.id.nfcConnect);
-        nfcConnect.setOnClickListener(this);
+
     }
 
 
@@ -84,18 +83,11 @@ public class ContactListActivity extends Activity implements View.OnClickListene
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.settings_button: {
-                Intent intent = new Intent(this, LoginActivity.class);
+            case R.id.contacts_button: {
+                Intent intent = new Intent(this, ConfirmInfoActivity.class);
                 startActivity(intent);
                 break;
             }
-            case R.id.nfcConnect: {
-                Intent i = new Intent();
-                i.setAction("launch.me.action.LAUNCH_IT");
-                startActivityForResult(i, 0);
-                break;
-            }
-
         }
     }
 }
