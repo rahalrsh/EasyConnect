@@ -1,10 +1,10 @@
 package easyconnect.example.com.easyconnect;
 
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 
 
-public class ContactListActivity extends Activity implements View.OnClickListener{
+public class ContactListActivity extends AppCompatActivity implements View.OnClickListener{
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;

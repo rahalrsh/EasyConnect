@@ -1,9 +1,9 @@
 package easyconnect.example.com.easyconnect;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,7 +13,7 @@ import com.facebook.login.widget.ProfilePictureView;
 
 
 
-public class ConfirmInfoActivity extends Activity implements View.OnClickListener{
+public class ConfirmInfoActivity extends AppCompatActivity implements View.OnClickListener{
 
     private ProfilePictureView profilepic;
 
