@@ -1,36 +1,14 @@
 package easyconnect.example.com.easyconnect;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
-
 import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-
-import com.facebook.AccessToken;
-import com.facebook.CallbackManager;
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
-import com.facebook.Profile;
-import com.facebook.login.LoginResult;
-import com.facebook.login.widget.LoginButton;
-
-import android.content.Intent;
-import android.support.v4.app.Fragment;
-import android.os.Bundle;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,7 +25,9 @@ import com.facebook.Profile;
 import com.facebook.ProfileTracker;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
-import com.facebook.login.widget.ProfilePictureView;
+
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 
 
 /**
@@ -58,11 +38,16 @@ public class FBFragment extends Fragment {
     public FBFragment() {
     }
 
-    private ProfilePictureView profilepic;
-
     private CallbackManager mCallbackManager;
     private TextView mTextDetails;
     private TextView profile_link;
+
+    // Database
+    DBHandler dbHandler;
+
+    // Profile Picture
+    private Bitmap profilePicBitmap;
+    private byte[] img=null;
 
     private AccessTokenTracker mTokenTracker;
     private ProfileTracker mProfileTracker;
@@ -79,9 +64,53 @@ public class FBFragment extends Fragment {
             intent.putExtra("FBLastName", profile.getLastName());
             intent.putExtra("FBProfileID", profile.getId());
 
-            profilepic.setProfileId(profile.getId());
+            new DownloadImageTask(profilePicBitmap).execute(new String[]{profile.getProfilePictureUri(200, 200).toString(), profile.getFirstName(), profile.getLastName(), profile.getLinkUri().toString(), profile.getId().toString()});
+
         }
         return intent;
+    }
+
+    // Download the FB profile image
+    // Save profile image and other FB data in the database (ex: first name, fb uid, fb link...etc)
+    private class DownloadImageTask extends AsyncTask<String, Bitmap, Bitmap> {
+        Bitmap bmImage;
+        String firstName;
+        String lastName;
+        String FBLink;
+        String FBuid;
+
+        public DownloadImageTask(Bitmap bmImage) {
+            this.bmImage = bmImage;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            this.firstName = urls[1];
+            this.lastName = urls[2];
+            this.FBLink = urls[3];
+            this.FBuid = urls[4];
+
+            Bitmap mIcon11 = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return mIcon11;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            profilePicBitmap = result;
+            ByteArrayOutputStream bos=new ByteArrayOutputStream();
+            profilePicBitmap.compress(Bitmap.CompressFormat.PNG, 100, bos);
+            img = bos.toByteArray();
+
+            dbHandler.open();
+            dbHandler.insertFBDataInRowOne(img,firstName,lastName,FBLink,FBuid);
+            dbHandler.close();
+        }
     }
 
     private FacebookCallback<LoginResult> mCallback=new FacebookCallback<LoginResult>() {
@@ -91,7 +120,6 @@ public class FBFragment extends Fragment {
             Profile profile = Profile.getCurrentProfile();
             Intent intent = displayWelcomeMessage(profile);
             Toast.makeText(getActivity(), "Login to Facebook was successful", Toast.LENGTH_SHORT).show();
-
 
             startActivity(intent);
 
@@ -111,6 +139,7 @@ public class FBFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(getActivity().getApplicationContext());
+        dbHandler = new DBHandler(getActivity().getApplicationContext());
         mCallbackManager = CallbackManager.Factory.create();
         mTokenTracker = new AccessTokenTracker() {
             @Override
@@ -144,7 +173,6 @@ public class FBFragment extends Fragment {
         loginButton.setFragment(this);
         loginButton.registerCallback(mCallbackManager, mCallback);
 
-        profilepic = (ProfilePictureView) view.findViewById(R.id.profile_pic);
         mTextDetails = (TextView)view.findViewById(R.id.text_details);
         profile_link =(TextView)view.findViewById(R.id.profile_link);
         profile_link.setMovementMethod(LinkMovementMethod.getInstance());
@@ -165,3 +193,6 @@ public class FBFragment extends Fragment {
         mProfileTracker.startTracking();
     }
 }
+
+
+

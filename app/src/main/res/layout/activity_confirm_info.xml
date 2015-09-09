@@ -28,7 +28,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="20dp"
+                android:layout_margin="5dp"
+                android:layout_marginLeft="20dp"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -67,7 +68,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="20dp"
+                android:layout_margin="5dp"
+                android:layout_marginLeft="20dp"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -77,26 +79,22 @@
                     android:layout_margin="15dp"
                     android:src="@drawable/camera_icon" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <ImageView
+                    android:id="@+id/fb_profile_pic"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_width="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:layout_marginBottom="10dp"
+                    android:src="@drawable/call_icon" />
 
-                    <com.facebook.login.widget.ProfilePictureView
-                        android:id="@+id/fb_profile_pic"
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:gravity="center_horizontal"
-                        android:layout_marginBottom="10dp"
-                        facebook:com_facebook_preset_size="normal"/>
-                </LinearLayout>
             </LinearLayout>
 
             <!--my phone-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="20dp"
+                android:layout_margin="5dp"
+                android:layout_marginLeft="20dp"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -106,36 +104,23 @@
                     android:layout_margin="15dp"
                     android:src="@drawable/call_icon" />
 
-                <LinearLayout
+                <EditText
+                    android:id="@+id/myPhoneNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_gravity="center_horizontal"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="Phone Number" />
 
-                    <EditText
-                        android:id="@+id/editText4"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:ems="10"
-                        android:inputType="textPersonName"
-                        android:text="Name" />
-
-                    <EditText
-                        android:id="@+id/editText5"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:ems="10"
-                        android:inputType="textPersonName"
-                        android:text="Name" />
-                </LinearLayout>
             </LinearLayout>
 
             <!--my email-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="20dp"
+                android:layout_margin="5dp"
+                android:layout_marginLeft="20dp"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -145,36 +130,23 @@
                     android:layout_margin="15dp"
                     android:src="@drawable/mail_icon" />
 
-                <LinearLayout
+                <EditText
+                    android:id="@+id/myEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_gravity="center_horizontal"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="Email" />
 
-                    <EditText
-                        android:id="@+id/editText6"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:ems="10"
-                        android:inputType="textPersonName"
-                        android:text="Name" />
-
-                    <EditText
-                        android:id="@+id/editText7"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:ems="10"
-                        android:inputType="textPersonName"
-                        android:text="Name" />
-                </LinearLayout>
             </LinearLayout>
 
             <!--my company-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="20dp"
+                android:layout_margin="5dp"
+                android:layout_marginLeft="20dp"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -184,29 +156,15 @@
                     android:layout_margin="15dp"
                     android:src="@drawable/company_icon" />
 
-                <LinearLayout
+                <EditText
+                    android:id="@+id/myCompany"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_gravity="center_horizontal"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="Work Place" />
 
-                    <EditText
-                        android:id="@+id/editText8"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:ems="10"
-                        android:inputType="textPersonName"
-                        android:text="Name" />
-
-                    <EditText
-                        android:id="@+id/editText9"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:ems="10"
-                        android:inputType="textPersonName"
-                        android:text="Name" />
-                </LinearLayout>
             </LinearLayout>
 
         </LinearLayout>

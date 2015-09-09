@@ -1,7 +1,6 @@
 package easyconnect.example.com.easyconnect;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -75,28 +74,27 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 if (isLoggedIn){
 
                     // insert data that we pulled from social media to the database
-                    dbHandler.open();
-                    long id = dbHandler.insertData("Barak", "Obama", "barak123@gmail.com", "647-123-4567", "U.S federal government", 12345, "fb.com/obama", 45467, "twitter.com/B.Obama");
-                    Toast.makeText(getBaseContext(), "Data inserted to database", Toast.LENGTH_LONG).show();
-                    Log.i("LoginActivity","Data inserted to database");
-                    dbHandler.close();
+                    // dbHandler.open();
+                    // long id = dbHandler.insertData("Barak", "Obama", "barak123@gmail.com", "647-123-4567", "U.S federal government", 12345, "fb.com/obama", 45467, "twitter.com/B.Obama");
+                    // Toast.makeText(getBaseContext(), "Data inserted to database", Toast.LENGTH_LONG).show();
+                    // Log.i("LoginActivity","Data inserted to database");
+                    // dbHandler.close();
 
 
                     // retrieve data from database
-                    dbHandler.open();
-                    Cursor c = dbHandler.returnData();
-                    if (c.moveToFirst()){ // if cursor move to first that means there are some data
-                        do{
-                            Log.i ("LoginActivity", "UserID: "+ c.getInt(0));
-                            Log.i ("LoginActivity","Name: "+ c.getString(1));
-                            Log.i ("LoginActivity","Email: "+ c.getString(3));
-                            Log.i ("LoginActivity", "fb UID: "+ c.getInt(6));
-                            Log.i ("------", "------");
+                    // dbHandler.open();
+                    // Cursor c = dbHandler.returnData();
+                    // if (c.moveToFirst()){ // if cursor move to first that means there are some data
+                    //     do{
+                    //         Log.i ("LoginActivity", "UserID: "+ c.getInt(0));
+                    //         Log.i ("LoginActivity","Name: "+ c.getString(1));
+                    //         Log.i ("LoginActivity","Email: "+ c.getString(3));
+                    //         Log.i ("LoginActivity", "fb UID: "+ c.getInt(6));
+                    //         Log.i ("------", "------");
+                    //     }while (c.moveToNext());
+                    // }
+                    // dbHandler.close();
 
-
-                        }while (c.moveToNext());
-                    }
-                    dbHandler.close();
                     Intent CofirmInfoIntent = new Intent(this, ConfirmInfoActivity.class);
 
                     Intent loginIntent = getIntent();
