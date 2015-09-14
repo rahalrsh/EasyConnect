@@ -3,7 +3,6 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:background="@drawable/background"
     
      >
 
@@ -32,7 +31,6 @@
 	            android:layout_width="fill_parent"
 	            android:layout_height="wrap_content"
 	            android:hint="@string/writerHint"
-	            android:background="@drawable/button"
 	            />
 
     <TextView

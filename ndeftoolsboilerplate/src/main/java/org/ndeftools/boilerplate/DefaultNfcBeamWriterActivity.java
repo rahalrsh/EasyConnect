@@ -104,6 +104,7 @@ public class DefaultNfcBeamWriterActivity extends NfcBeamWriterActivity {
 
 
 	public void toast(int id) {
+
 		toast(getString(id));
 	}
 	

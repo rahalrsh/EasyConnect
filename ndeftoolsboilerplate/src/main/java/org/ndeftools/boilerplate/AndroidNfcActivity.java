@@ -21,10 +21,14 @@
 package org.ndeftools.boilerplate;
 
 
-
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.nfc.NfcAdapter;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 
@@ -50,8 +54,39 @@ public class AndroidNfcActivity extends Activity {
             View view = findViewById(R.id.beamer);
             view.setVisibility(View.VISIBLE);
         }
-		
-		setTitle(R.string.app_name_description);
+
+        // check to see if NFC is enabled on the device
+        NfcAdapter mNfcAdapter= android.nfc.NfcAdapter.getDefaultAdapter(this);
+
+        if (!mNfcAdapter.isEnabled()) {
+
+            AlertDialog.Builder alertbox = new AlertDialog.Builder(this);
+            alertbox.setTitle("Info");
+            alertbox.setMessage("Enable NFC");
+            alertbox.setPositiveButton("Turn On", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                        Intent intent = new Intent(Settings.ACTION_NFC_SETTINGS);
+                        startActivity(intent);
+                    } else {
+                        Intent intent = new Intent(Settings.ACTION_WIRELESS_SETTINGS);
+                        startActivity(intent);
+                    }
+                }
+            });
+            alertbox.setNegativeButton("Close", new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                }
+            });
+            alertbox.show();
+
+        }
+
+
     }
     
     public void writer(View view) {

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">NDEF Tools for Android</string>
-    <string name="app_name_description">NDEF Tools for Android boilerplate</string>
+
     
     <string name="androidApplication">Android Application</string>
     <string name="androidApplicationPackageName">Package name</string>
@@ -107,11 +107,11 @@
     <string name="writerHint">Your Text Record-text here</string>
     <string name="writerScanHint">(Scan tag to write at any time.)</string>
     
-    <string name="reader">NFC tag and Beam (push) reader</string>
+    <string name="reader">NFC Beam reader</string>
     <string name="readerTitle">NFC tag and Beam (push) reader demo</string>
     <string name="readerDescription">This activity reads and displays the contents of any incoming NFC message in the NDEF format.</string>
     
-    <string name="beamer">NFC Beam (push) writer</string>
+    <string name="beamer">NFC Beam writer</string>
     <string name="beamerTitle">NFC Beam (push) writer demo</string>
     <string name="beamerDescription">This activity beams (pushes) an Android Application Record to any other device, as well as detecting incoming messages in the NDEF format.\n\nNote that most phones require that the sender manually taps on the screen to do the actual payload data transmit part of the beam (push) messaging.</string>
 
