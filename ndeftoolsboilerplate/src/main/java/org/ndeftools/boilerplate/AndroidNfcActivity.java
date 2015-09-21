@@ -61,8 +61,8 @@ public class AndroidNfcActivity extends Activity {
         if (!mNfcAdapter.isEnabled()) {
 
             AlertDialog.Builder alertbox = new AlertDialog.Builder(this);
-            alertbox.setTitle("Info");
-            alertbox.setMessage("Enable NFC");
+            alertbox.setTitle("Please Turn On NFC");
+            alertbox.setMessage("Start using Tag Writer/Reader, NFC Beam features");
             alertbox.setPositiveButton("Turn On", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
