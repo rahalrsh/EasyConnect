@@ -1,6 +1,5 @@
 package easyconnect.example.com.easyconnect;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -61,7 +60,7 @@ public class ContactInfoActivity extends AppCompatActivity implements OnClickLis
 
         // initialize all User Info
         contact_name = (TextView) findViewById(R.id.contact_name);
-        contact_name.setText("DR.Evil");
+        contact_name.setText("Test Ad");
         home_address = (TextView) findViewById(R.id.home_address);
         home_address.setText("h3e1m2");
         email_address = (TextView) findViewById(R.id.email_address);
@@ -69,7 +68,7 @@ public class ContactInfoActivity extends AppCompatActivity implements OnClickLis
         phone_number = (TextView) findViewById(R.id.phone_number);
         phone_number.setText("5142208630");
         profile_pic = (ImageView) findViewById(R.id.profile_pic);
-        profile_pic.setImageResource(R.drawable.austin);
+        profile_pic.setImageResource(R.drawable.default_img);
 
         //Initialize links
         FacebookButton = (ImageView) findViewById(R.id.facebook_button);
