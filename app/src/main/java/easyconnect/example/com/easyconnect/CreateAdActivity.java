@@ -63,7 +63,6 @@ public class CreateAdActivity extends AppCompatActivity implements View.OnClickL
             return super.onOptionsItemSelected(item);
         }
 
-
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
