@@ -36,6 +36,7 @@ public class DBHandler {
     // AdsInfoTable
     public static final String ADS_TABLE = "adsTable";
     public static final String USER_NAME = "userName";
+    public static final String AD_ID = "adID";
     public static final String TITLE = "title";
     public static final String DESCRIPTION = "description";
     public static final String IMAGE_URL = "imageURL";
@@ -189,7 +190,11 @@ public class DBHandler {
     }
 
     public Cursor searchAdbyID (long adId){
-        return db.query(ADS_TABLE, new String[]{TITLE, USER_NAME, DESCRIPTION, IMAGE_URL, PHONE}, "adID="+adId, null, null, null, null);
+        return db.query(ADS_TABLE, new String[]{TITLE, USER_NAME, DESCRIPTION, IMAGE_URL, PHONE}, "adID=" + adId, null, null, null, null);
+    }
+
+    public Cursor searchAllAds (){
+        return db.query(ADS_TABLE, new String[]{AD_ID, TITLE, USER_NAME, DESCRIPTION, IMAGE_URL, PHONE}, null, null, null, null, null);
     }
 
 

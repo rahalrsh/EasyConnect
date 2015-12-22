@@ -9,10 +9,12 @@ public class DataObject {
 
     private String mText1;
     private String mText2;
+    private Long ad_id;
 
-    DataObject(String text1, String text2){
+    DataObject(String text1, String text2 , Long id){
         mText1 = text1;
         mText2 = text2;
+        ad_id = id;
     }
 
     public String getmText1() {
@@ -29,5 +31,9 @@ public class DataObject {
 
     public void setmText2(String mText2) {
         this.mText2 = mText2;
+    }
+
+    public Long getadId() {
+        return ad_id;
     }
 }
