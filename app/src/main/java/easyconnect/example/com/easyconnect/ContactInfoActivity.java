@@ -82,6 +82,13 @@ public class ContactInfoActivity extends AppCompatActivity implements OnClickLis
     }
 
 
+    @Override
+    public void onBackPressed() {
+        finish();
+        Intent intent = new Intent(this, ContactListActivity.class);
+        startActivity(intent);
+    }
+    
     public void onClick(View selected) {
 
 
