@@ -43,6 +43,9 @@ public class ContactListActivity extends AppCompatActivity implements View.OnCli
         FloatingActionButton settingsButton = (FloatingActionButton)findViewById(R.id.contacts_button);
         settingsButton.setOnClickListener(this);
 
+        FloatingActionButton createAdButton = (FloatingActionButton)findViewById(R.id.createAd_button);
+        createAdButton.setOnClickListener(this);
+
 
     }
 
@@ -85,6 +88,11 @@ public class ContactListActivity extends AppCompatActivity implements View.OnCli
         switch (v.getId()) {
             case R.id.contacts_button: {
                 Intent intent = new Intent(this, ConfirmInfoActivity.class);
+                startActivity(intent);
+                break;
+            }
+            case R.id.createAd_button: {
+                Intent intent = new Intent(this, CreateAdActivity.class);
                 startActivity(intent);
                 break;
             }

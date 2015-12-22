@@ -26,7 +26,6 @@ public class ConfirmInfoActivity extends AppCompatActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirm_info);
 
-        setContentView(R.layout.activity_confirm_info);
         TextView FBFirstNametextview = (TextView) findViewById(R.id.FBFirstName);
         TextView FBLastNametextview = (TextView) findViewById(R.id.FBLastName);
         ImageView profilepic = (ImageView) findViewById(R.id.fb_profile_pic);

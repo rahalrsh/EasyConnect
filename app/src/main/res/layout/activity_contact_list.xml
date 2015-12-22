@@ -40,7 +40,7 @@
             android:src="@drawable/settings_icon" />
 
         <android.support.design.widget.FloatingActionButton
-            android:id="@+id/messages_button"
+            android:id="@+id/createAd_button"
             android:layout_width="64dip"
             android:layout_height="64dip"
             android:elevation="10dp"
