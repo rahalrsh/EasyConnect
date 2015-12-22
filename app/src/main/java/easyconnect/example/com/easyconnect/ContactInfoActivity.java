@@ -14,8 +14,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-
+import android.widget.Toast;
 
 
 public class ContactInfoActivity extends AppCompatActivity implements OnClickListener {
@@ -28,6 +27,9 @@ public class ContactInfoActivity extends AppCompatActivity implements OnClickLis
     ImageView TwitterButton;
     ImageView LinkedInButton;
     ImageView FacebookButton;
+
+    DBHandler dbHandler;
+    Cursor c;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +83,17 @@ public class ContactInfoActivity extends AppCompatActivity implements OnClickLis
 
         LinkedInButton = (ImageView) findViewById(R.id.linkedin_button);
         LinkedInButton.setOnClickListener(this);
+
+
+        dbHandler = new DBHandler(getBaseContext());
+        Intent intent = getIntent();
+        long adID = intent.getLongExtra("AD_ID", 1L);
+        dbHandler.open();
+        c = dbHandler.searchAdbyID(adID);
+        c.moveToFirst();
+        Toast.makeText(getApplicationContext(), "Title:"+c.getString(0), Toast.LENGTH_LONG).show();
+        dbHandler.close();
+
     }
 
     public void DatabaseInsertTest() {

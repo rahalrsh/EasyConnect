@@ -30,14 +30,19 @@ public class DBHandler {
     public static final String DATA_BASE_NAME = "devDataBase";
     public static final int DATA_BASE_VERSION = 1;
 
-    // testing
-    // public static final String IMAGES_TABLE_NAME = "contactImagesTable";
-    // public static final String USER_IMAGE = "img";
-    // public static final String IMAGES_TABLE_CREATE =   "CREATE TABLE contactImagesTable (userID INTEGER PRIMARY KEY AUTOINCREMENT,img BLOB);";
-    // public static final String IMAGES_TABLE_DROP_IF_EXIST = "DROP TABLE IF EXISTS contactImagesTable";
-
     public static final String TABLE_CREATE =   "CREATE TABLE contactInfoTable (userID INTEGER PRIMARY KEY AUTOINCREMENT,firstName TEXT, lastName TEXT, email TEXT, mobile TEXT, company TEXT, fbUID TEXT, fbLink TEXT, twitterUID TEXT, twitterLink TEXT, img BLOB);";
     public static final String TABLE_DROP_IF_EXIST = "DROP TABLE IF EXISTS contactInfoTable";
+
+    // AdsInfoTable
+    public static final String ADS_TABLE = "adsTable";
+    public static final String USER_NAME = "userName";
+    public static final String TITLE = "title";
+    public static final String DESCRIPTION = "description";
+    public static final String IMAGE_URL = "imageURL";
+    public static final String PHONE = "phone";
+
+    public static final String ADS_TABLE_CREATE = "CREATE TABLE adsTable (adID INTEGER PRIMARY KEY AUTOINCREMENT,userName TEXT, title TEXT, description TEXT, imageURL TEXT, phone TEXT);";
+    public static final String ADS_TABLE_DROP_IF_EXIST = "DROP TABLE IF EXISTS adsTable";
 
     DataBaseHelper dbhelper;
     Context ctx;
@@ -57,6 +62,7 @@ public class DBHandler {
         public void onCreate(SQLiteDatabase db) {
             try {
                 db.execSQL(TABLE_CREATE);
+                db.execSQL(ADS_TABLE_CREATE);
                 // db.execSQL(IMAGES_TABLE_CREATE);
                 Log.i("DBHandler.java","Table Created");
             }
@@ -70,6 +76,7 @@ public class DBHandler {
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // First Drop Table if it exist already
             db.execSQL(TABLE_DROP_IF_EXIST);
+            db.execSQL(ADS_TABLE_DROP_IF_EXIST);
             // Now create Table by calling onCreate(db)
             onCreate(db);
         }
@@ -161,5 +168,30 @@ public class DBHandler {
         }
         close();
     }
+
+
+    // Methods for adsTable
+    public long insertAd (String adTitle, String userName, String adDescription, String imageURL, String phone){
+        ContentValues content = new ContentValues();
+        content.put(TITLE, adTitle);
+        content.put(USER_NAME, userName);
+        content.put(DESCRIPTION, adDescription);
+        content.put(IMAGE_URL, imageURL);
+        content.put(PHONE, phone);
+        return db.insertOrThrow(ADS_TABLE, null, content);
+    }
+
+    public long selectLastInsearted(){
+        String selectQuery = "SELECT adID FROM " + ADS_TABLE;
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        cursor.moveToLast();
+        return cursor.getLong(0);
+    }
+
+    public Cursor searchAdbyID (long adId){
+        return db.query(ADS_TABLE, new String[]{TITLE, USER_NAME, DESCRIPTION, IMAGE_URL, PHONE}, "adID="+adId, null, null, null, null);
+    }
+
+
 
 }

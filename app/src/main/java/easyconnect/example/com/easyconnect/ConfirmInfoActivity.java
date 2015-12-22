@@ -19,13 +19,14 @@ import android.widget.TextView;
 public class ConfirmInfoActivity extends AppCompatActivity implements View.OnClickListener{
 
     DBHandler dbHandler;
+    Cursor c;
+    TextView FBFirstNametextview;
     private byte[] img=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirm_info);
-
         TextView FBFirstNametextview = (TextView) findViewById(R.id.FBFirstName);
         TextView FBLastNametextview = (TextView) findViewById(R.id.FBLastName);
         ImageView profilepic = (ImageView) findViewById(R.id.fb_profile_pic);
@@ -48,7 +49,7 @@ public class ConfirmInfoActivity extends AppCompatActivity implements View.OnCli
 
         dbHandler.open();
         // Ideally this should be returnDataInRowOne
-        Cursor c = dbHandler.returnData();
+        c = dbHandler.returnData();
         if (c.moveToFirst()){
             FBFirstNametextview.setText(c.getString(c.getColumnIndex("firstName")));
             FBLastNametextview.setText(c.getString(c.getColumnIndex("lastName")));
@@ -96,6 +97,16 @@ public class ConfirmInfoActivity extends AppCompatActivity implements View.OnCli
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.confirm_profile_button: {
+
+                //check if user info has changed
+                if(c.moveToFirst() == true && !c.getString(c.getColumnIndex("firstName")).toString().equals(FBFirstNametextview.getText().toString())){
+                    Log.i ("TEST", "CHANGED");
+                    Log.i ("TEST2", c.getString(c.getColumnIndex("firstName"))+"");
+                    Log.i ("TEST3", FBFirstNametextview.getText().toString()+"");
+
+
+                }
+
                 Intent intent = new Intent(this, ContactListActivity.class);
                 startActivity(intent);
                 break;

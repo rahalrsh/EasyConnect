@@ -175,7 +175,7 @@
 
 
         <android.support.design.widget.FloatingActionButton
-            android:id="@+id/confirm_ad_button"
+            android:id="@+id/create_ad_button"
             android:layout_width="64dip"
             android:layout_height="64dip"
             android:src="@drawable/check_icon"
