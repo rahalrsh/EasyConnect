@@ -148,7 +148,7 @@
                     android:layout_width="32dip"
                     android:layout_height="32dip"
                     android:layout_margin="15dp"
-                    android:src="@drawable/company_icon" />
+                    android:src="@drawable/camera_icon"/>
 
                 <EditText
                     android:id="@+id/adImageUrl"

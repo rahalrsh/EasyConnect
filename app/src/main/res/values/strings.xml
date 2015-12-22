@@ -22,6 +22,6 @@
     <string name="phone_title">Phone</string>
     <string name="email_title">Email</string>
     <string name="address_title">Address</string>
-    <string name="title_activity_create_ad">Create a new Ad</string>
+    <string name="title_activity_create_ad">Create a New Ad</string>
 
 </resources>
