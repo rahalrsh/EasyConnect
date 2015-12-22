@@ -95,7 +95,7 @@ public class ContactListActivity extends AppCompatActivity implements View.OnCli
         });
     }
 
-    // adding dummy data for now - need to get all contact info from DB
+    // getting all contact info from DB
     private ArrayList<DataObject> getDataSet() {
 
 

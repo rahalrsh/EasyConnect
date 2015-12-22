@@ -9,6 +9,7 @@
     <string name="title_activity_contact_list">Your Ad List</string>
     <string name="title_activity_contact_info">Detailed Ad Info</string>
     <string name="title_activity_nfcmain">NFC Connect</string>
+    <string name="title_activity_create_ad">Create a New Ad</string>
     <string name="are_you_sure">Go to this website</string>
     <string name="fire">Go</string>
     <string name="cancel">cancel</string>
@@ -16,12 +17,5 @@
 
 
     <string name="nfcinstructions">Tap on the buttons </string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="phone_title">Phone</string>
-    <string name="email_title">Email</string>
-    <string name="address_title">Address</string>
-    <string name="title_activity_create_ad">Create a New Ad</string>
 
 </resources>

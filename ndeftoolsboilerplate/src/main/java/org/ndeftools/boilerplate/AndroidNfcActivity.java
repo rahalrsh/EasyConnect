@@ -31,6 +31,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 /**
  * 
@@ -43,7 +44,8 @@ import android.view.View;
 public class AndroidNfcActivity extends Activity {
 	
     private static final String TAG = AndroidNfcActivity.class.getName();
-    
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,6 +88,10 @@ public class AndroidNfcActivity extends Activity {
 
         }
 
+        Intent intent = getIntent();
+        String adID = intent.getStringExtra("AD_Info");
+
+        Toast.makeText(getApplicationContext(), "Ad info:" + adID , Toast.LENGTH_LONG).show();
 
     }
     

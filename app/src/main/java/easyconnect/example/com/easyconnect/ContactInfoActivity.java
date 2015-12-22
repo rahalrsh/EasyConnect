@@ -20,10 +20,11 @@ import android.widget.Toast;
 public class ContactInfoActivity extends AppCompatActivity implements OnClickListener {
 
     TextView contact_name;
-    TextView home_address;
-    TextView email_address;
+    TextView ad_description;
     TextView phone_number;
     ImageView profile_pic;
+
+    //TODO: integrate social media
     ImageView TwitterButton;
     ImageView LinkedInButton;
     ImageView FacebookButton;
@@ -36,40 +37,34 @@ public class ContactInfoActivity extends AppCompatActivity implements OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_info);
 
+        dbHandler = new DBHandler(getBaseContext());
+        Intent intent = getIntent();
+        long adID = intent.getLongExtra("AD_ID", 1L);
+        dbHandler.open();
+        c = dbHandler.searchAdbyID(adID);
+        c.moveToFirst();
+        Toast.makeText(getApplicationContext(), "Title:"+ c.getString(0), Toast.LENGTH_LONG).show();
+        dbHandler.close();
+
         // moving nfc to detailed contact page
         FloatingActionButton nfcConnect = (FloatingActionButton) findViewById(R.id.nfcConnect);
         nfcConnect.setOnClickListener(this);
 
-
-        //insert dummy values into the database for testing purposes
-        DatabaseInsertTest();
-
-
-        //get the data base values for this contact name assuming it is unique for now
-        String email = "n/a";
-        DBHandler MyDataBaseHandler = new DBHandler(this);
-        MyDataBaseHandler = MyDataBaseHandler.open();
-        String query = "Select " + MyDataBaseHandler.EMAIL + " FROM " + MyDataBaseHandler.TABLE_NAME + " WHERE " + MyDataBaseHandler.FIRST_NAME + " LIKE 'evil'";
-        Cursor c = MyDataBaseHandler.db.rawQuery(query, null);
-        c.moveToFirst();
-
-        if (c.getString(c.getColumnIndex("email")) != null) {
-            email = c.getString(c.getColumnIndex("email"));
-        }
-
-        MyDataBaseHandler.close();
-
-
         // initialize all User Info
+        contact_name = (TextView) findViewById(R.id.ad_title);
+        contact_name.setText(c.getString(0));
+
         contact_name = (TextView) findViewById(R.id.contact_name);
-        contact_name.setText("Test Ad");
-        home_address = (TextView) findViewById(R.id.home_address);
-        home_address.setText("h3e1m2");
-        email_address = (TextView) findViewById(R.id.email_address);
-        email_address.setText(email.toString());
+        contact_name.setText(c.getString(1));
+
+        ad_description = (TextView) findViewById(R.id.ad_description);
+        ad_description.setText(c.getString(2));
+
         phone_number = (TextView) findViewById(R.id.phone_number);
-        phone_number.setText("5142208630");
-        profile_pic = (ImageView) findViewById(R.id.profile_pic);
+        phone_number.setText(c.getString(4));
+
+
+        profile_pic = (ImageView) findViewById(R.id.ad_pic);
         profile_pic.setImageResource(R.drawable.default_img);
 
         //Initialize links
@@ -84,24 +79,8 @@ public class ContactInfoActivity extends AppCompatActivity implements OnClickLis
         LinkedInButton = (ImageView) findViewById(R.id.linkedin_button);
         LinkedInButton.setOnClickListener(this);
 
-
-        dbHandler = new DBHandler(getBaseContext());
-        Intent intent = getIntent();
-        long adID = intent.getLongExtra("AD_ID", 1L);
-        dbHandler.open();
-        c = dbHandler.searchAdbyID(adID);
-        c.moveToFirst();
-        Toast.makeText(getApplicationContext(), "Title:"+c.getString(0), Toast.LENGTH_LONG).show();
-        dbHandler.close();
-
     }
 
-    public void DatabaseInsertTest() {
-        DBHandler MyDataBaseHandler = new DBHandler(this);
-        MyDataBaseHandler = MyDataBaseHandler.open();
-        MyDataBaseHandler.insertData("evil", "last name", "drEvil@gmail.com", "647-222-4567", "Evil Company", 1234567, "fb.com/DR.Evil", 454673, "twitter.com/D.Evil");
-        MyDataBaseHandler.close();
-    }
 
     public void onClick(View selected) {
 
@@ -140,9 +119,10 @@ public class ContactInfoActivity extends AppCompatActivity implements OnClickLis
                 break;
             }
             case R.id.nfcConnect: {
-                Intent i = new Intent();
-                i.setAction("launch.me.action.LAUNCH_IT");
-                startActivityForResult(i, 0);
+                Intent intent = new Intent();
+                intent.setAction("launch.me.action.LAUNCH_IT");
+                intent.putExtra("AD_Info",c.getString(0));
+                startActivityForResult(intent, 0);
                 break;
             }
 
