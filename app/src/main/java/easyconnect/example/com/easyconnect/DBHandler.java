@@ -197,6 +197,9 @@ public class DBHandler {
         return db.query(ADS_TABLE, new String[]{AD_ID, TITLE, USER_NAME, DESCRIPTION, IMAGE_URL, PHONE}, null, null, null, null, null);
     }
 
-
-
+    public int deleteAd(long adId)
+    {
+        return db.delete(ADS_TABLE, "adID=" + adId, null);
+    }
+    
 }

@@ -69,12 +69,13 @@ public class ContactListActivity extends AppCompatActivity implements View.OnCli
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
-    }
 
+    }
 
     @Override
     protected void onResume() {
         super.onResume();
+
         ((MyRecyclerViewAdapter) mAdapter).setOnItemClickListener(new MyRecyclerViewAdapter
                 .MyClickListener() {
             @Override
@@ -87,7 +88,7 @@ public class ContactListActivity extends AppCompatActivity implements View.OnCli
                 //String contactName = ((TextView) v).getText().toString();
 
                 // put the dummy contact info as an extra field
-                DataObject cur = (DataObject)results.get(position);
+                DataObject cur = (DataObject) results.get(position);
 
                 intent.putExtra("AD_ID", cur.getadId());
                 startActivity(intent);

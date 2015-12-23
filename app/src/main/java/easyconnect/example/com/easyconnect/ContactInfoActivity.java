@@ -32,6 +32,8 @@ public class ContactInfoActivity extends AppCompatActivity implements OnClickLis
     DBHandler dbHandler;
     Cursor c;
 
+    long adID;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +41,7 @@ public class ContactInfoActivity extends AppCompatActivity implements OnClickLis
 
         dbHandler = new DBHandler(getBaseContext());
         Intent intent = getIntent();
-        long adID = intent.getLongExtra("AD_ID", 1L);
+        adID = intent.getLongExtra("AD_ID", 1L);
         dbHandler.open();
         c = dbHandler.searchAdbyID(adID);
         c.moveToFirst();
@@ -151,7 +153,17 @@ public class ContactInfoActivity extends AppCompatActivity implements OnClickLis
             int id = item.getItemId();
 
             //noinspection SimplifiableIfStatement
-            if (id == R.id.action_settings) {
+            if (id == R.id.action_delete) {
+
+                // ActionBar -> Delete Ad clicked
+                // delete the advertisement from the database
+                dbHandler.open();
+                dbHandler.deleteAd(adID);
+                dbHandler.close();
+                // After deleting the advertisement from the db, go back to the ListActivity
+                Intent intent = new Intent(this, ContactListActivity.class);
+                startActivity(intent);
+
                 return true;
             }
 
