@@ -1,11 +1,15 @@
 package easyconnect.example.com.easyconnect;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -21,13 +25,21 @@ public class MyRecyclerViewAdapter extends RecyclerView
             .OnClickListener {
         TextView label;
         TextView dateTime;
+        ImageView imageViewIcon;
+        Context c;
 
         public DataObjectHolder(View itemView) {
             super(itemView);
             label = (TextView) itemView.findViewById(R.id.textView);
             dateTime = (TextView) itemView.findViewById(R.id.textView2);
+            imageViewIcon = (ImageView) itemView.findViewById(R.id.img_imageView);
             Log.i(LOG_TAG, "Adding Listener");
             itemView.setOnClickListener(this);
+            c = imageViewIcon.getContext();;
+        }
+
+        public Context getImageViewContext(){
+            return c;
         }
 
         @Override
@@ -58,6 +70,8 @@ public class MyRecyclerViewAdapter extends RecyclerView
     public void onBindViewHolder(DataObjectHolder holder, int position) {
         holder.label.setText(String.valueOf(mDataset.get(position).getmText1()));
         holder.dateTime.setText(String.valueOf(mDataset.get(position).getmText2()));
+        //Log.i("img", "position url=" + mDataset.get(position).getmText1());
+        Picasso.with(holder.getImageViewContext()).load(mDataset.get(position).getImageURL()).into(holder.imageViewIcon);
     }
 
     public void addItem(DataObject dataObj, int index) {
@@ -79,4 +93,5 @@ public class MyRecyclerViewAdapter extends RecyclerView
         public void onItemClick(int position, View v);
 
     }
+
 }

@@ -10,11 +10,13 @@ public class DataObject {
     private String mText1;
     private String mText2;
     private Long ad_id;
+    private String imageURL;
 
-    DataObject(String text1, String text2 , Long id){
+    DataObject(String text1, String text2 , Long id, String URL){
         mText1 = text1;
         mText2 = text2;
         ad_id = id;
+        imageURL = URL;
     }
 
     public String getmText1() {
@@ -29,11 +31,11 @@ public class DataObject {
         return mText2;
     }
 
-    public void setmText2(String mText2) {
-        this.mText2 = mText2;
-    }
+    public void setmText2(String mText2) { this.mText2 = mText2; }
 
     public Long getadId() {
         return ad_id;
     }
+
+    public String getImageURL() { return imageURL;}
 }

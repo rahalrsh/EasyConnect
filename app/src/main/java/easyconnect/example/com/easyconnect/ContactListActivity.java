@@ -114,7 +114,7 @@ public class ContactListActivity extends AppCompatActivity implements View.OnCli
                 Log.i("printDBInfo", "Image Url: " + c.getString(4));
                 Log.i("printDBInfo", "Phone: " + c.getInt(5));
 
-                DataObject obj = new DataObject(c.getString(1), c.getString(3), c.getLong(0));
+                DataObject obj = new DataObject(c.getString(1), c.getString(3), c.getLong(0), c.getString(4));
                 results.add(index, obj);
 
                 index++;
