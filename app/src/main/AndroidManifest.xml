@@ -3,6 +3,10 @@
     package="easyconnect.example.com.easyconnect">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- permission for GPS based location -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- permission for Network based location -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:name=".MyApplication"
