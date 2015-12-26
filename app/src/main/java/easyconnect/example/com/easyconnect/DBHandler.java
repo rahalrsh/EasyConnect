@@ -41,8 +41,9 @@ public class DBHandler {
     public static final String DESCRIPTION = "description";
     public static final String IMAGE_URL = "imageURL";
     public static final String PHONE = "phone";
+    public static final String IS_MY_AD = "isMyAd";
 
-    public static final String ADS_TABLE_CREATE = "CREATE TABLE adsTable (adID INTEGER PRIMARY KEY AUTOINCREMENT,userName TEXT, title TEXT, description TEXT, imageURL TEXT, phone TEXT);";
+    public static final String ADS_TABLE_CREATE = "CREATE TABLE adsTable (adID INTEGER PRIMARY KEY AUTOINCREMENT,userName TEXT, title TEXT, description TEXT, imageURL TEXT, phone TEXT, isMyAd INTEGER DEFAULT 0);";
     public static final String ADS_TABLE_DROP_IF_EXIST = "DROP TABLE IF EXISTS adsTable";
 
     DataBaseHelper dbhelper;
@@ -172,13 +173,14 @@ public class DBHandler {
 
 
     // Methods for adsTable
-    public long insertAd (String adTitle, String userName, String adDescription, String imageURL, String phone){
+    public long insertAd (String adTitle, String userName, String adDescription, String imageURL, String phone, int isMyAd){
         ContentValues content = new ContentValues();
         content.put(TITLE, adTitle);
         content.put(USER_NAME, userName);
         content.put(DESCRIPTION, adDescription);
         content.put(IMAGE_URL, imageURL);
         content.put(PHONE, phone);
+        content.put(IS_MY_AD, isMyAd);
         return db.insertOrThrow(ADS_TABLE, null, content);
     }
 
@@ -190,11 +192,11 @@ public class DBHandler {
     }
 
     public Cursor searchAdbyID (long adId){
-        return db.query(ADS_TABLE, new String[]{TITLE, USER_NAME, DESCRIPTION, IMAGE_URL, PHONE}, "adID=" + adId, null, null, null, null);
+        return db.query(ADS_TABLE, new String[]{TITLE, USER_NAME, DESCRIPTION, IMAGE_URL, PHONE, IS_MY_AD}, "adID=" + adId, null, null, null, null);
     }
 
     public Cursor searchAllAds (){
-        return db.query(ADS_TABLE, new String[]{AD_ID, TITLE, USER_NAME, DESCRIPTION, IMAGE_URL, PHONE}, null, null, null, null, null);
+        return db.query(ADS_TABLE, new String[]{AD_ID, TITLE, USER_NAME, DESCRIPTION, IMAGE_URL, PHONE, IS_MY_AD}, null, null, null, null, null);
     }
 
     public int deleteAd(long adId)

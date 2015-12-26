@@ -68,7 +68,9 @@ public class CreateAdActivity extends AppCompatActivity implements View.OnClickL
             switch (v.getId()) {
                 case R.id.create_ad_button: {
 
-                    dbHandler.open();
+                    // Todo: Check which parent activity invoked this activity.
+                    // Todo: if it is the NFC read, then make isMyAd=0
+                    int isMyAd = 1;
 
                     String Name = fullName.getText().toString();
                     String phone = phoneNumber.getText().toString();
@@ -76,8 +78,11 @@ public class CreateAdActivity extends AppCompatActivity implements View.OnClickL
                     String Details = adDetails.getText().toString();
                     String ImageUrl = adImageUrl.getText().toString();
 
-                    long rowID = dbHandler.insertAd(Title, Name, Details, ImageUrl, phone);
+                    dbHandler.open();
+                    long rowID = dbHandler.insertAd(Title, Name, Details, ImageUrl, phone, isMyAd);
                     long adID = dbHandler.selectLastInsearted();
+                    dbHandler.close();
+
                     Toast.makeText(getApplicationContext(), "Inserted to AD_ID="+adID, Toast.LENGTH_LONG).show();
 
                     if (rowID != -1) {
