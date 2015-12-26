@@ -39,7 +39,7 @@ public class CreateAdActivity extends AppCompatActivity implements View.OnClickL
             ComponentName caller = getCallingActivity();
 
             //check the caller activity
-            if(caller.getClassName().compareTo("easyconnect.example.com.easyconnect.NfcTagReaderActivity") == 0){
+            if(caller != null && caller.getClassName().compareTo("easyconnect.example.com.easyconnect.NfcTagReaderActivity") == 0){
                 //[contact_name]|[phone_number]|[ad_title]|[ad_description]|[image_url]
                 fullName.setText(intent.getStringExtra("contact_name"));
                 phoneNumber.setText(intent.getStringExtra("phone_number"));
