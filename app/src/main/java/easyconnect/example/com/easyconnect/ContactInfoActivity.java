@@ -45,7 +45,7 @@ public class ContactInfoActivity extends AppCompatActivity implements OnClickLis
         dbHandler.open();
         c = dbHandler.searchAdbyID(adID);
         c.moveToFirst();
-        Toast.makeText(getApplicationContext(), "Title:"+ c.getString(0), Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), "Title:"+ c.getString(0), Toast.LENGTH_SHORT).show();
         dbHandler.close();
 
         // moving nfc to detailed contact page
@@ -128,9 +128,9 @@ public class ContactInfoActivity extends AppCompatActivity implements OnClickLis
                 break;
             }
             case R.id.nfcConnect: {
-                Intent intent = new Intent();
-                intent.setAction("launch.me.action.LAUNCH_IT");
-                intent.putExtra("AD_Info",c.getString(0));
+                Intent intent = new Intent(ContactInfoActivity.this, NfcTagWriterActivity.class);
+                // Format here is [contact_name]|[phone_number]|[ad_title]|[ad_description]|[image_url]
+                intent.putExtra("AD_Info",c.getString(1)+"|"+ c.getString(4) + "|" + c.getString(0) + "|" +c.getString(2)+"|"+c.getString(3));
                 startActivityForResult(intent, 0);
                 break;
             }

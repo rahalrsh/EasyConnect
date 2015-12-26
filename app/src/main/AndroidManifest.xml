@@ -34,18 +34,32 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
             android:name=".LoginActivity"
-            android:label="@string/title_activity_login"></activity>
+            android:label="@string/title_activity_login"/>
         <activity
             android:name=".MainActivity"
-            android:label="@string/title_activity_contact_list"></activity>
+            android:label="@string/title_activity_contact_list"/>
         <activity
             android:name=".ContactInfoActivity"
             android:label="@string/title_activity_contact_info"
-            android:parentActivityName=".ContactListActivity"></activity>
+            android:parentActivityName=".ContactListActivity"/>
+        <activity
+            android:name=".NfcTagWriterActivity"
+            android:label="@string/title_activity_nfc_tagwriter"
+            android:parentActivityName=".ContactInfoActivity"/>
+        <activity
+            android:name=".NfcTagReaderActivity"
+            android:label="@string/title_activity_nfc_tagreader"
+            android:parentActivityName=".ContactInfoActivity">
+                <intent-filter>
+                    <action android:name="android.nfc.action.NDEF_DISCOVERED"/>
+                    <category android:name="android.intent.category.DEFAULT"/>
+                    <data android:mimeType="text/plain" />
+                </intent-filter>
+        </activity>
         <activity
             android:name=".ConfirmInfoActivity"
             android:label="@string/title_activity_confirm_info"
-            android:windowSoftInputMode="stateHidden"></activity>
+            android:windowSoftInputMode="stateHidden"/>
         <activity
             android:name=".CreateAdActivity"
             android:label="@string/title_activity_create_ad"

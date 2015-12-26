@@ -9,6 +9,8 @@
     <string name="title_activity_confirm_info">Confirm Personal Info</string>
     <string name="title_activity_contact_list">Your Ad List</string>
     <string name="title_activity_contact_info">Detailed Ad Info</string>
+    <string name="title_activity_nfc_tagwriter">Program NFC Tags</string>
+    <string name="title_activity_nfc_tagreader">Read NFC Tags</string>
     <string name="title_activity_nfcmain">NFC Connect</string>
     <string name="title_activity_create_ad">Create a New Ad</string>
     <string name="are_you_sure">Go to this website</string>

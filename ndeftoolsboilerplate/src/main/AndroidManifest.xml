@@ -31,7 +31,7 @@
     android:configChanges="orientation|keyboardHidden"
     >
 
-   <!-- open any tag with ndef content -->
+   <!-- open any tag with ndef content
            <intent-filter>
    				 <action   android:name="android.nfc.action.TECH_DISCOVERED" />
    				 <category android:name="android.intent.category.DEFAULT"/>
@@ -39,7 +39,7 @@
 		 	
 			<meta-data android:name="android.nfc.action.TECH_DISCOVERED" android:resource="@xml/nfc_tech_filter" />
 
-			<!-- see also http://stackoverflow.com/questions/7114297/how-specify-mimetype-for-read-nfc-tag-with-url -->
+			 see also http://stackoverflow.com/questions/7114297/how-specify-mimetype-for-read-nfc-tag-with-url -->
 			
         </activity>
 

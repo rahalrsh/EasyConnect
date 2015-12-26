@@ -19,13 +19,6 @@
 
 package org.ndeftools.boilerplate;
 
-import org.ndeftools.Message;
-import org.ndeftools.MimeRecord;
-import org.ndeftools.Record;
-import org.ndeftools.externaltype.ExternalTypeRecord;
-import org.ndeftools.util.activity.NfcReaderActivity;
-import org.ndeftools.wellknown.TextRecord;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -33,6 +26,13 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import org.ndeftools.Message;
+import org.ndeftools.MimeRecord;
+import org.ndeftools.Record;
+import org.ndeftools.externaltype.ExternalTypeRecord;
+import org.ndeftools.util.activity.NfcReaderActivity;
+import org.ndeftools.wellknown.TextRecord;
 
 /**
  * 
@@ -86,7 +86,8 @@ public class DefaultNfcReaderActivity extends NfcReaderActivity {
 			Record record = message.get(k);
 			
 			Log.d(TAG, "Record " + k + " type " + record.getClass().getSimpleName());
-			
+
+			record.getKey();
 			// your own code here, for example:
 			if(record instanceof MimeRecord) {
 				// ..

@@ -1,5 +1,6 @@
 package easyconnect.example.com.easyconnect;
 
+import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -33,6 +34,21 @@ public class CreateAdActivity extends AppCompatActivity implements View.OnClickL
             adTitle = (TextView) findViewById(R.id.adTitle);
             adDetails = (TextView) findViewById(R.id.adDetails);
             adImageUrl = (TextView) findViewById(R.id.adImageUrl);
+
+            Intent intent = getIntent();
+            ComponentName caller = getCallingActivity();
+
+            //check the caller activity
+            if(caller.getClassName().compareTo("easyconnect.example.com.easyconnect.NfcTagReaderActivity") == 0){
+                //[contact_name]|[phone_number]|[ad_title]|[ad_description]|[image_url]
+                fullName.setText(intent.getStringExtra("contact_name"));
+                phoneNumber.setText(intent.getStringExtra("phone_number"));
+                adTitle.setText(intent.getStringExtra("ad_title"));
+                adDetails.setText(intent.getStringExtra("ad_description"));
+                adImageUrl.setText(intent.getStringExtra("image_url"));
+            }
+
+
         }
 
         @Override
