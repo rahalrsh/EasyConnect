@@ -10,6 +10,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ImageView;
+import android.graphics.Bitmap;
+
+
 
 public class CreateAdActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -18,7 +22,10 @@ public class CreateAdActivity extends AppCompatActivity implements View.OnClickL
         TextView phoneNumber;
         TextView adTitle;
         TextView adDetails;
+        ImageView adImage;
         TextView adImageUrl;
+
+
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +41,7 @@ public class CreateAdActivity extends AppCompatActivity implements View.OnClickL
             adTitle = (TextView) findViewById(R.id.adTitle);
             adDetails = (TextView) findViewById(R.id.adDetails);
             adImageUrl = (TextView) findViewById(R.id.adImageUrl);
+            adImage = (ImageView)findViewById(R.id.adImage);
 
             Intent intent = getIntent();
             ComponentName caller = getCallingActivity();
@@ -94,8 +102,18 @@ public class CreateAdActivity extends AppCompatActivity implements View.OnClickL
                     String Details = adDetails.getText().toString();
                     String ImageUrl = adImageUrl.getText().toString();
 
+                    // changing image to a BitMap
+                    adImage.setDrawingCacheEnabled(true);
+                    adImage.buildDrawingCache();
+                    Bitmap bm = adImage.getDrawingCache();
+
                     dbHandler.open();
-                    long rowID = dbHandler.insertAd(Title, Name, Details, ImageUrl, phone, isMyAd);
+
+                    //changing image to a Byte stream
+                    byte[] image = dbHandler.getBytes(bm);
+
+                    //insert ad info locally
+                    long rowID = dbHandler.insertAd(Title, Name, Details, ImageUrl, phone, isMyAd,image);
                     long adID = dbHandler.selectLastInsearted();
                     dbHandler.close();
 
