@@ -47,7 +47,7 @@ public class DBHandler {
     public static final String IMAGE_URL = "imageURL";
     public static final String PHONE = "phone";
     public static final String IS_MY_AD = "isMyAd";
-    private static final String KEY_IMAGE = "image_data";
+    private static final String KEY_IMG = "image_data";
 
     public static final String ADS_TABLE_CREATE = "CREATE TABLE adsTable (adID INTEGER PRIMARY KEY AUTOINCREMENT,userName TEXT, title TEXT, description TEXT, imageURL TEXT, phone TEXT, isMyAd INTEGER DEFAULT 0,image_data BLOB);";
     public static final String ADS_TABLE_DROP_IF_EXIST = "DROP TABLE IF EXISTS adsTable";
@@ -200,7 +200,7 @@ public class DBHandler {
         content.put(IMAGE_URL, imageURL);
         content.put(PHONE, phone);
         content.put(IS_MY_AD, isMyAd);
-        content.put(KEY_IMAGE,   image);
+        content.put(KEY_IMG,   image);
         return db.insertOrThrow(ADS_TABLE, null, content);
     }
 
@@ -212,11 +212,11 @@ public class DBHandler {
     }
 
     public Cursor searchAdbyID (long adId){
-        return db.query(ADS_TABLE, new String[]{TITLE, USER_NAME, DESCRIPTION, IMAGE_URL, PHONE, IS_MY_AD,KEY_IMAGE}, "adID=" + adId, null, null, null, null,null);
+        return db.query(ADS_TABLE, new String[]{TITLE, USER_NAME, DESCRIPTION, IMAGE_URL, PHONE, IS_MY_AD,KEY_IMG}, "adID=" + adId, null, null, null, null,null);
     }
 
     public Cursor searchAllAds (){
-        return db.query(ADS_TABLE, new String[]{AD_ID, TITLE, USER_NAME, DESCRIPTION, IMAGE_URL, PHONE, IS_MY_AD,KEY_IMAGE}, null,null, null, null, null, null);
+        return db.query(ADS_TABLE, new String[]{AD_ID, TITLE, USER_NAME, DESCRIPTION, IMAGE_URL, PHONE, IS_MY_AD,KEY_IMG}, null,null, null, null, null, null);
     }
 
     public int deleteAd(long adId)
