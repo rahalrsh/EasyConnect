@@ -37,7 +37,7 @@ import java.io.IOException;
 public class CreateAdActivity extends AppCompatActivity implements View.OnClickListener{
 
     Button button;
-    // this is the action code we use in our intent,
+    // this is the action code we use in our intent
     // this way we know we're looking at the response from our own action
     private static final int SELECT_PICTURE = 1;
     private String selectedImagePath;
