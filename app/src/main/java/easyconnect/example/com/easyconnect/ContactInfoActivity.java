@@ -22,7 +22,7 @@ public class ContactInfoActivity extends AppCompatActivity implements OnClickLis
     TextView contact_name;
     TextView ad_description;
     TextView phone_number;
-    ImageView profile_pic;
+    ImageView ad_pic;
 
     //TODO: integrate social media
     ImageView TwitterButton;
@@ -66,8 +66,8 @@ public class ContactInfoActivity extends AppCompatActivity implements OnClickLis
         phone_number.setText(c.getString(4));
 
         //sets ad image to image that has been saved to sql database
-        profile_pic = (ImageView) findViewById(R.id.ad_pic);
-        profile_pic.setImageBitmap(dbHandler.getImage(c.getBlob(6)));
+        ad_pic = (ImageView) findViewById(R.id.ad_pic);
+        ad_pic.setImageBitmap(dbHandler.getImage(c.getBlob(6)));
 
         //Initialize links
         FacebookButton = (ImageView) findViewById(R.id.facebook_button);
