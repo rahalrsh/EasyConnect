@@ -42,6 +42,7 @@ public class CreateAdActivity extends AppCompatActivity implements View.OnClickL
     private static final int SELECT_PICTURE = 1;
     private String selectedImagePath;
     private String objectID;
+    private ParseFile imageUploadFile;
 
         DBHandler dbHandler;
         TextView fullName;
@@ -145,6 +146,34 @@ public class CreateAdActivity extends AppCompatActivity implements View.OnClickL
                     String Details = adDetails.getText().toString();
                     String ImageUrl = adImageUrl.getText().toString();
 
+
+                    // Create a New Class called "ImageUpload" in Parse
+                    final ParseObject imgupload = new ParseObject("Ad_info_test2");
+
+                    // Create a column named "ImageName" and set the string
+                    imgupload.put("ImageName", "Ad Pic");
+
+                    // Create a column named "ImageFile" and insert the image
+                    imgupload.put("ImageFile", imageUploadFile);
+                    imgupload.put("Name", Name);
+                    imgupload.put("Title", Title);
+                    imgupload.put("Phone", phone);
+                    imgupload.put("Details", Details);
+                    // Create the class and the columns
+                    try {
+                        imgupload.save();
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+                    String ObjectID = imgupload.getObjectId();
+                    Log.d("Bk:", "ObjectID:" + ObjectID);
+
+                    //Toast.makeText(getApplicationContext(), objectID, Toast.LENGTH_LONG).show();
+                    // Show a simple toast message
+                    Toast.makeText(CreateAdActivity.this, "Image Uploaded",
+                            Toast.LENGTH_SHORT).show();
+
                     // changing image to a BitMap
                     adImage.setDrawingCacheEnabled(true);
                     adImage.buildDrawingCache();
@@ -180,7 +209,7 @@ public class CreateAdActivity extends AppCompatActivity implements View.OnClickL
             if (requestCode == SELECT_PICTURE) {
                 Uri selectedImageUri = data.getData();
                 selectedImagePath = getPath(selectedImageUri);
-
+                String test = getPath(selectedImageUri);
 
                 // Locate the image in res > drawable-hdpi
                 //Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.mipmap.ic_launcher);
@@ -193,55 +222,28 @@ public class CreateAdActivity extends AppCompatActivity implements View.OnClickL
                 // Convert it to byte
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 // Compress image to lower quality scale 1 - 100
-                bitmap.compress(Bitmap.CompressFormat.PNG, 50, stream);
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 20, stream);
                 byte[] image = stream.toByteArray();
 
                 // Create the ParseFile
-                ParseFile file = new ParseFile("adpic.png", image);
+                ParseFile file = new ParseFile("adpic.jpg", image);
                 // Upload the image into Parse Cloud
-                file.saveInBackground();
+                try {
+                    file.save();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
 
-                // Create a New Class called "ImageUpload" in Parse
-                final ParseObject imgupload = new ParseObject("AdInfo_test");
+                //IMAGE URL, Moataz you can use this url to download a copy to the database
+                String image_url = file.getUrl();
+                adImageUrl.setText(image_url);
 
-                // Create a column named "ImageName" and set the string
-                imgupload.put("ImageName", "Ad Pic");
-
-                // Create a column named "ImageFile" and insert the image
-                imgupload.put("ImageFile", file);
-                imgupload.put("Name", "BeeKay");
-                imgupload.put("Address", "Blah");
-                // Create the class and the columns
-                imgupload.saveInBackground(new SaveCallback() {
-                    @Override
-                    public void done(ParseException e) {
-                        // Now you can do whatever you want with the object ID, like save it in a variable
-                        objectID = imgupload.getObjectId();
-                        Log.d("BK:", objectID);
-                    }
-                });
-
-                ParseQuery<ParseObject> query= ParseQuery.getQuery("AdInfo_test");
-                query.getInBackground(objectID, new GetCallback<ParseObject>() {
-
-                    @Override
-                    public void done(ParseObject arg0, ParseException arg1) {
-                        // TODO Auto-generated method stub
-
-                        if (arg1 == null) {
-                            //String ImageURL = arg0.getString("ImageFile");
-                            ParseFile Image = (ParseFile) arg0.get("ImageFile");
-                            Log.d("ImageURL:","the URL of " + objectID+ " is " + Image.getUrl());
-
-                        } else {
-                            Log.d("ImageURL", "Error: " + arg1.getMessage());
-                        }
-                    }
-                });
-                //Toast.makeText(getApplicationContext(), objectID, Toast.LENGTH_LONG).show();
-                // Show a simple toast message
                 Toast.makeText(CreateAdActivity.this, "Image Uploaded",
                         Toast.LENGTH_SHORT).show();
+
+                //set global variable
+                imageUploadFile = file;
+
             }
         }
     }
