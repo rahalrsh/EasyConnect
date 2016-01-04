@@ -185,7 +185,7 @@ public class CreateAdActivity extends AppCompatActivity implements View.OnClickL
                     byte[] image = dbHandler.getBytes(bm);
 
                     //insert ad info locally
-                    long rowID = dbHandler.insertAd(Title, Name, Details, ImageUrl, phone, isMyAd,image);
+                    long rowID = dbHandler.insertAd(Title, Name, Details, ImageUrl, phone, isMyAd,image, ObjectID);
                     long adID = dbHandler.selectLastInsearted();
                     dbHandler.close();
 

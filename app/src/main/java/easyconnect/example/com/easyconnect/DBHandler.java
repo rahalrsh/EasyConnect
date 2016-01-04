@@ -48,8 +48,8 @@ public class DBHandler {
     public static final String PHONE = "phone";
     public static final String IS_MY_AD = "isMyAd";
     private static final String KEY_IMG = "image_data";
-
-    public static final String ADS_TABLE_CREATE = "CREATE TABLE adsTable (adID INTEGER PRIMARY KEY AUTOINCREMENT,userName TEXT, title TEXT, description TEXT, imageURL TEXT, phone TEXT, isMyAd INTEGER DEFAULT 0,image_data BLOB);";
+    private static final String OBJ_ID = "object_id";
+    public static final String ADS_TABLE_CREATE = "CREATE TABLE adsTable (adID INTEGER PRIMARY KEY AUTOINCREMENT,userName TEXT, title TEXT, description TEXT, imageURL TEXT, phone TEXT, isMyAd INTEGER DEFAULT 0,image_data BLOB, object_id TEXT);";
     public static final String ADS_TABLE_DROP_IF_EXIST = "DROP TABLE IF EXISTS adsTable";
 
     DataBaseHelper dbhelper;
@@ -192,7 +192,7 @@ public class DBHandler {
 
 
     // Methods for adsTable
-    public long insertAd (String adTitle, String userName, String adDescription, String imageURL, String phone, int isMyAd, byte[] image){
+    public long insertAd (String adTitle, String userName, String adDescription, String imageURL, String phone, int isMyAd, byte[] image, String objectID){
         ContentValues content = new ContentValues();
         content.put(TITLE, adTitle);
         content.put(USER_NAME, userName);
@@ -201,6 +201,7 @@ public class DBHandler {
         content.put(PHONE, phone);
         content.put(IS_MY_AD, isMyAd);
         content.put(KEY_IMG,   image);
+        content.put(OBJ_ID,   image);
         return db.insertOrThrow(ADS_TABLE, null, content);
     }
 
