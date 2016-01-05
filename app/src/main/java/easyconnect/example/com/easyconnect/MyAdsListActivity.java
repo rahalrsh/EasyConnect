@@ -1,6 +1,5 @@
 package easyconnect.example.com.easyconnect;
 
-
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -10,8 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 
 import com.google.android.gms.appindexing.Action;
@@ -20,8 +17,10 @@ import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.util.ArrayList;
 
-
-public class ContactListActivity extends AppCompatActivity implements View.OnClickListener {
+/**
+ * Created by rahal on 2016-01-04.
+ */
+public class MyAdsListActivity extends AppCompatActivity implements View.OnClickListener {
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
@@ -31,7 +30,6 @@ public class ContactListActivity extends AppCompatActivity implements View.OnCli
 
     DBHandler dbHandler;
     Cursor c;
-    UserLocation userLocation;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -72,8 +70,6 @@ public class ContactListActivity extends AppCompatActivity implements View.OnCli
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
-
-        userLocation = new UserLocation();
     }
 
     /*
@@ -87,22 +83,15 @@ public class ContactListActivity extends AppCompatActivity implements View.OnCli
     @Override
     protected void onResume() {
         super.onResume();
-        userLocation.getUserLocation(this);
 
         ((MyRecyclerViewAdapter) mAdapter).setOnItemClickListener(new MyRecyclerViewAdapter
                 .MyClickListener() {
             @Override
             public void onItemClick(int position, View v) {
                 Log.i(LOG_TAG, " Clicked on Item " + position);
-
-                Intent intent = new Intent(ContactListActivity.this, ContactInfoActivity.class);
-
-                // Get the data of the item that user touches
-                //String contactName = ((TextView) v).getText().toString();
-
+                Intent intent = new Intent(MyAdsListActivity.this, ContactInfoActivity.class);
                 // put the dummy contact info as an extra field
                 DataObject cur = (DataObject) results.get(position);
-
                 intent.putExtra("AD_ID", cur.getadId());
                 startActivity(intent);
             }
@@ -111,7 +100,6 @@ public class ContactListActivity extends AppCompatActivity implements View.OnCli
 
     // getting all contact info from DB
     private ArrayList<DataObject> getDataSet() {
-
 
         // retrieve data from database
         dbHandler.open();
@@ -129,7 +117,8 @@ public class ContactListActivity extends AppCompatActivity implements View.OnCli
                 Log.i("printDBInfo", "is My Ad: " + c.getInt(6));
                 int isMyAd = Integer.parseInt(c.getString(6));
 
-                if (isMyAd == 0) {
+                // Only add my ads
+                if (isMyAd == 1) {
                     DataObject obj = new DataObject(c.getString(1), c.getString(3), c.getLong(0), c.getString(4));
                     results.add(index, obj);
                     index++;
@@ -146,11 +135,6 @@ public class ContactListActivity extends AppCompatActivity implements View.OnCli
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            //case R.id.contacts_button: {
-            //    Intent intent = new Intent(this, ConfirmInfoActivity.class);
-            //    startActivity(intent);
-            //    break;
-            // }
             case R.id.createAd_button: {
                 Intent intent = new Intent(this, CreateAdActivity.class);
                 startActivity(intent);
@@ -197,30 +181,5 @@ public class ContactListActivity extends AppCompatActivity implements View.OnCli
         );
         AppIndex.AppIndexApi.end(client, viewAction);
         client.disconnect();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_contact_list, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected (MenuItem item){
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.my_ads) {
-
-            // After deleting the advertisement from the db, go back to the ListActivity
-            Intent intent = new Intent(this, MyAdsListActivity.class);
-            startActivity(intent);
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }

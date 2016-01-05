@@ -45,6 +45,7 @@ public class CreateAdActivity extends AppCompatActivity implements View.OnClickL
         TextView adTitle;
         TextView adDetails;
         TextView adImageUrl;
+        int isMyAd;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +61,7 @@ public class CreateAdActivity extends AppCompatActivity implements View.OnClickL
             adTitle = (TextView) findViewById(R.id.adTitle);
             adDetails = (TextView) findViewById(R.id.adDetails);
             adImageUrl = (TextView) findViewById(R.id.adImageUrl);
+            isMyAd = 1;
 
             Intent intent = getIntent();
             ComponentName caller = getCallingActivity();
@@ -72,6 +74,7 @@ public class CreateAdActivity extends AppCompatActivity implements View.OnClickL
                 adTitle.setText(intent.getStringExtra("ad_title"));
                 adDetails.setText(intent.getStringExtra("ad_description"));
                 adImageUrl.setText(intent.getStringExtra("image_url"));
+                isMyAd = 0;
             }
 
             // Locate the button in main.xml
@@ -129,7 +132,6 @@ public class CreateAdActivity extends AppCompatActivity implements View.OnClickL
 
                     // Todo: Check which parent activity invoked this activity.
                     // Todo: if it is the NFC read, then make isMyAd=0
-                    int isMyAd = 1;
 
                     String Name = fullName.getText().toString();
                     String phone = phoneNumber.getText().toString();
