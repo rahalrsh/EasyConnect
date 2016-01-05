@@ -201,7 +201,7 @@ public class DBHandler {
         content.put(PHONE, phone);
         content.put(IS_MY_AD, isMyAd);
         content.put(KEY_IMG,   image);
-        content.put(OBJ_ID,   image);
+        content.put(OBJ_ID,   objectID);
         return db.insertOrThrow(ADS_TABLE, null, content);
     }
 
