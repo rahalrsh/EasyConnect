@@ -7,6 +7,11 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Bitmap.CompressFormat;
+import java.io.ByteArrayOutputStream;
+
 
 /**
  * Created by rahal on 15-07-07.
@@ -42,8 +47,9 @@ public class DBHandler {
     public static final String IMAGE_URL = "imageURL";
     public static final String PHONE = "phone";
     public static final String IS_MY_AD = "isMyAd";
-
-    public static final String ADS_TABLE_CREATE = "CREATE TABLE adsTable (adID INTEGER PRIMARY KEY AUTOINCREMENT,userName TEXT, title TEXT, description TEXT, imageURL TEXT, phone TEXT, isMyAd INTEGER DEFAULT 0);";
+    private static final String KEY_IMG = "image_data";
+    private static final String OBJ_ID = "object_id";
+    public static final String ADS_TABLE_CREATE = "CREATE TABLE adsTable (adID INTEGER PRIMARY KEY AUTOINCREMENT,userName TEXT, title TEXT, description TEXT, imageURL TEXT, phone TEXT, isMyAd INTEGER DEFAULT 0,image_data BLOB, object_id TEXT);";
     public static final String ADS_TABLE_DROP_IF_EXIST = "DROP TABLE IF EXISTS adsTable";
 
     DataBaseHelper dbhelper;
@@ -83,6 +89,19 @@ public class DBHandler {
             onCreate(db);
         }
     }
+
+        //methods for handeling image data and converting back and forth between bitmap and bytes
+        // convert from bitmap to byte array
+        public static byte[] getBytes(Bitmap bitmap) {
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bitmap.compress(CompressFormat.PNG, 0, stream);
+            return stream.toByteArray();
+        }
+
+        // convert from byte array to bitmap
+        public static Bitmap getImage(byte[] image) {
+            return BitmapFactory.decodeByteArray(image, 0, image.length);
+        }
 
     // Method for opening database
     public DBHandler open(){
@@ -173,7 +192,7 @@ public class DBHandler {
 
 
     // Methods for adsTable
-    public long insertAd (String adTitle, String userName, String adDescription, String imageURL, String phone, int isMyAd){
+    public long insertAd (String adTitle, String userName, String adDescription, String imageURL, String phone, int isMyAd, byte[] image, String objectID){
         ContentValues content = new ContentValues();
         content.put(TITLE, adTitle);
         content.put(USER_NAME, userName);
@@ -181,6 +200,8 @@ public class DBHandler {
         content.put(IMAGE_URL, imageURL);
         content.put(PHONE, phone);
         content.put(IS_MY_AD, isMyAd);
+        content.put(KEY_IMG,   image);
+        content.put(OBJ_ID,   image);
         return db.insertOrThrow(ADS_TABLE, null, content);
     }
 
@@ -192,11 +213,11 @@ public class DBHandler {
     }
 
     public Cursor searchAdbyID (long adId){
-        return db.query(ADS_TABLE, new String[]{TITLE, USER_NAME, DESCRIPTION, IMAGE_URL, PHONE, IS_MY_AD}, "adID=" + adId, null, null, null, null);
+        return db.query(ADS_TABLE, new String[]{TITLE, USER_NAME, DESCRIPTION, IMAGE_URL, PHONE, IS_MY_AD,KEY_IMG}, "adID=" + adId, null, null, null, null,null);
     }
 
     public Cursor searchAllAds (){
-        return db.query(ADS_TABLE, new String[]{AD_ID, TITLE, USER_NAME, DESCRIPTION, IMAGE_URL, PHONE, IS_MY_AD}, null, null, null, null, null);
+        return db.query(ADS_TABLE, new String[]{AD_ID, TITLE, USER_NAME, DESCRIPTION, IMAGE_URL, PHONE, IS_MY_AD,KEY_IMG}, null,null, null, null, null, null);
     }
 
     public int deleteAd(long adId)

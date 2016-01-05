@@ -26,6 +26,21 @@
 
             <!--my name-->
             <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="1">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/adImage"
+                    android:src="@drawable/person_icon"
+                    android:layout_weight="0.71" />
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
@@ -191,12 +206,14 @@
         android:layout_alignParentEnd="true">
 
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/create_ad_button"
-            android:layout_width="64dip"
-            android:layout_height="64dip"
-            android:src="@drawable/check_icon"
-            circle:backgroundTint="#009688" />
     </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/create_ad_button"
+        android:layout_width="64dip"
+        android:layout_height="64dip"
+        android:src="@drawable/check_icon"
+        circle:backgroundTint="#009688"
+        android:layout_gravity="right|bottom" />
 
 </FrameLayout>

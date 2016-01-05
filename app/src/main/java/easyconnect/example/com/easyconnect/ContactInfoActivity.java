@@ -22,7 +22,7 @@ public class ContactInfoActivity extends AppCompatActivity implements OnClickLis
     TextView contact_name;
     TextView ad_description;
     TextView phone_number;
-    ImageView profile_pic;
+    ImageView ad_pic;
 
     //TODO: integrate social media
     ImageView TwitterButton;
@@ -46,7 +46,7 @@ public class ContactInfoActivity extends AppCompatActivity implements OnClickLis
         c = dbHandler.searchAdbyID(adID);
         c.moveToFirst();
         Toast.makeText(getApplicationContext(), "Title:"+ c.getString(0), Toast.LENGTH_SHORT).show();
-        dbHandler.close();
+
 
         // moving nfc to detailed contact page
         FloatingActionButton nfcConnect = (FloatingActionButton) findViewById(R.id.nfcConnect);
@@ -65,9 +65,9 @@ public class ContactInfoActivity extends AppCompatActivity implements OnClickLis
         phone_number = (TextView) findViewById(R.id.phone_number);
         phone_number.setText(c.getString(4));
 
-
-        profile_pic = (ImageView) findViewById(R.id.ad_pic);
-        profile_pic.setImageResource(R.drawable.default_img);
+        //sets ad image to image that has been saved to sql database
+        ad_pic = (ImageView) findViewById(R.id.ad_pic);
+        ad_pic.setImageBitmap(dbHandler.getImage(c.getBlob(6)));
 
         //Initialize links
         FacebookButton = (ImageView) findViewById(R.id.facebook_button);
@@ -80,7 +80,7 @@ public class ContactInfoActivity extends AppCompatActivity implements OnClickLis
 
         LinkedInButton = (ImageView) findViewById(R.id.linkedin_button);
         LinkedInButton.setOnClickListener(this);
-
+        dbHandler.close();
     }
 
 
