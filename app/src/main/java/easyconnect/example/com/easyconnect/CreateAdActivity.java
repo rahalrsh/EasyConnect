@@ -150,7 +150,9 @@ public class CreateAdActivity extends AppCompatActivity implements View.OnClickL
                     imgupload.put("ImageName", "Ad Pic");
 
                     // Create a column named "ImageFile" and insert the image
-                    imgupload.put("ImageFile", imageUploadFile);
+                    if(imageUploadFile!=null){
+                        imgupload.put("ImageFile", imageUploadFile);
+                    }
                     imgupload.put("Name", Name);
                     imgupload.put("Title", Title);
                     imgupload.put("Phone", phone);
@@ -167,7 +169,7 @@ public class CreateAdActivity extends AppCompatActivity implements View.OnClickL
 
                     //Toast.makeText(getApplicationContext(), objectID, Toast.LENGTH_LONG).show();
                     // Show a simple toast message
-                    Toast.makeText(CreateAdActivity.this, "Image Uploaded",
+                    Toast.makeText(CreateAdActivity.this, "Record Uploaded",
                             Toast.LENGTH_SHORT).show();
 
                     // changing image to a BitMap
