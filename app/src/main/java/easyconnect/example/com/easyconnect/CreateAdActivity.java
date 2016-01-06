@@ -20,21 +20,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.parse.GetCallback;
-import com.parse.GetDataCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
-import com.parse.ParseQuery;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileDescriptor;
 import java.io.IOException;
 
-
 public class CreateAdActivity extends AppCompatActivity implements View.OnClickListener{
 
-    int isMyAd = 1;
     Button button;
     // this is the action code we use in our intent
     // this way we know we're looking at the response from our own action
@@ -42,164 +37,110 @@ public class CreateAdActivity extends AppCompatActivity implements View.OnClickL
     private String selectedImagePath;
     private String objectID;
     private ParseFile imageUploadFile;
-    //This is the parseObject containing all relevant ad info stored in parse
-    private ParseObject retrieveObject;
-    //This is the image (bytes) contained in the above mentioned ParseObject
-    private byte[] retrieveImage;
-    DBHandler dbHandler;
-    TextView fullName;
-    TextView phoneNumber;
-    TextView adTitle;
-    TextView adDetails;
-    TextView adImageUrl;
-    ImageView adImage;
-    // the adImage ImageView in bytes
-    byte[] image;
 
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_ad);
+        DBHandler dbHandler;
+        TextView fullName;
+        TextView phoneNumber;
+        TextView adTitle;
+        TextView adDetails;
+        ImageView adImage;
+        TextView adImageUrl;
+        int isMyAd;
 
 
 
-        dbHandler = new DBHandler(getBaseContext());
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_create_ad);
 
-        FloatingActionButton createAdButton = (FloatingActionButton) findViewById(R.id.create_ad_button);
-        createAdButton.setOnClickListener(this);
-        fullName = (TextView) findViewById(R.id.fullName);
-        phoneNumber = (TextView) findViewById(R.id.phoneNumber);
-        adTitle = (TextView) findViewById(R.id.adTitle);
-        adDetails = (TextView) findViewById(R.id.adDetails);
-        adImageUrl = (TextView) findViewById(R.id.adImageUrl);
-        adImage = (ImageView)findViewById(R.id.adImage);
+            dbHandler = new DBHandler(getBaseContext());
 
-        Intent intent = getIntent();
-        ComponentName caller = getCallingActivity();
+            FloatingActionButton createAdButton = (FloatingActionButton) findViewById(R.id.create_ad_button);
+            createAdButton.setOnClickListener(this);
+            fullName = (TextView) findViewById(R.id.fullName);
+            phoneNumber = (TextView) findViewById(R.id.phoneNumber);
+            adTitle = (TextView) findViewById(R.id.adTitle);
+            adDetails = (TextView) findViewById(R.id.adDetails);
+            adImageUrl = (TextView) findViewById(R.id.adImageUrl);
+            adImage = (ImageView)findViewById(R.id.adImage);
+            isMyAd = 1;
 
-        //check the caller activity
-        if(caller != null && caller.getClassName().compareTo("easyconnect.example.com.easyconnect.NfcTagReaderActivity") == 0){
-            //Set global identifier to 0 i.e its not my ad
-            isMyAd = 0;
-            //[contact_name]|[phone_number]|[ad_title]|[ad_description]|[image_url]
-            // No editing permission In the case of Extract from NFC
-            fullName.setText(intent.getStringExtra("contact_name"));
-            fullName.setEnabled(false);
-            phoneNumber.setText(intent.getStringExtra("phone_number"));
-            phoneNumber.setEnabled(false);
-            adTitle.setText(intent.getStringExtra("ad_title"));
-            adTitle.setEnabled(false);
-            adDetails.setText(intent.getStringExtra("ad_description"));
-            adDetails.setEnabled(false);
-            adImageUrl.setText(intent.getStringExtra("image_url"));
-            adImageUrl.setEnabled(false);
+            Intent intent = getIntent();
+            ComponentName caller = getCallingActivity();
 
-            //If we are using NFC the Image is getting loaded from parse. This function sets the retrieveParseObject and retrieveImage
-            // Global variables. We can then use them to populate the local DB- Nisal i'm assuming object_id is returned by ur NFC class
-            RetrieveParseObjects(intent.getStringExtra("object_id"));
-            adImage.setImageBitmap(dbHandler.getImage(retrieveImage));
-            objectID = intent.getStringExtra("object_id");
-        }
+            //check the caller activity
+            if(caller != null && caller.getClassName().compareTo("easyconnect.example.com.easyconnect.NfcTagReaderActivity") == 0){
+                //[contact_name]|[phone_number]|[ad_title]|[ad_description]|[image_url]
+                fullName.setText(intent.getStringExtra("contact_name"));
+                phoneNumber.setText(intent.getStringExtra("phone_number"));
+                adTitle.setText(intent.getStringExtra("ad_title"));
+                adDetails.setText(intent.getStringExtra("ad_description"));
+                adImageUrl.setText(intent.getStringExtra("image_url"));
+                isMyAd = 0;
+            }
 
-        // Locate the button in main.xml
-        button = (Button) findViewById(R.id.uploadbtn);
+            // Locate the button in main.xml
+            button = (Button) findViewById(R.id.uploadbtn);
 
-        // Capture button clicks
-        button.setOnClickListener(new View.OnClickListener() {
+            // Capture button clicks
+            button.setOnClickListener(new View.OnClickListener() {
 
-            public void onClick(View arg0) {
+                public void onClick(View arg0) {
 
-                // in onCreate or any event where your want the user to
-                // select a file
-                //You can only Upload if you are creating not if you are extracting NFC info
-                if (isMyAd == 1)
-                {
+                    // in onCreate or any event where your want the user to
+                    // select a file
                     Intent intent = new Intent();
                     intent.setType("image/*");
                     intent.setAction(Intent.ACTION_GET_CONTENT);
                     startActivityForResult(Intent.createChooser(intent,
                             "Select Picture"), SELECT_PICTURE);
+
                 }
-                else{}
-            }
-        });
-    }
+            });
+        }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_create_ad, menu);
-        return true;
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        @Override
+        public boolean onCreateOptionsMenu(Menu menu) {
+            // Inflate the menu; this adds items to the action bar if it is present.
+            getMenuInflater().inflate(R.menu.menu_create_ad, menu);
             return true;
         }
 
-        return super.onOptionsItemSelected(item);
-    }
+        @Override
+        protected void onResume() {
+            super.onResume();
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.create_ad_button: {
+        }
 
-                // Todo: Check which parent activity invoked this activity.
-                // Todo: if it is the NFC read, then make isMyAd=0 Done
+        @Override
+        public boolean onOptionsItemSelected(MenuItem item) {
+            // Handle action bar item clicks here. The action bar will
+            // automatically handle clicks on the Home/Up button, so long
+            // as you specify a parent activity in AndroidManifest.xml.
+            int id = item.getItemId();
 
+            //noinspection SimplifiableIfStatement
+            if (id == R.id.action_settings) {
+                return true;
+            }
 
-                String Name = fullName.getText().toString();
-                String phone = phoneNumber.getText().toString();
-                String Title = adTitle.getText().toString();
-                String Details = adDetails.getText().toString();
-                String ImageUrl = adImageUrl.getText().toString();
+            return super.onOptionsItemSelected(item);
+        }
 
-                // changing adImage to a BitMap
-                adImage.setDrawingCacheEnabled(true);
-                adImage.buildDrawingCache();
-                Bitmap bitmap = adImage.getDrawingCache();
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.create_ad_button: {
 
+                    // Todo: Check which parent activity invoked this activity.
+                    // Todo: if it is the NFC read, then make isMyAd=0
 
-
-                //changing bitmap to a Byte stream and then byte array
-                ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                // Compress image to lower quality scale 1 - 100
-                // bitmap.compress(Bitmap.CompressFormat.JPEG, 20, stream);
-                //changing image to a Byte stream
-                image = dbHandler.getBytes(bitmap);
-
-                // Do the following if you are creating an ad
-                if(isMyAd == 1) {
-                    // Create the ParseFile
-                    ParseFile file = new ParseFile("adpic.jpg", image);
-                    // Upload the Default image into Parse Cloud
-                    try {
-                        file.save();
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
-
-                    //IMAGE URL, Moataz you can use this url to download a copy to the database
-                    String image_url = file.getUrl();
-                    adImageUrl.setText(image_url);
-
-                    //set global variable
-                    imageUploadFile = file;
+                    String Name = fullName.getText().toString();
+                    String phone = phoneNumber.getText().toString();
+                    String Title = adTitle.getText().toString();
+                    String Details = adDetails.getText().toString();
+                    String ImageUrl = adImageUrl.getText().toString();
 
 
                     // Create a New Class called "ImageUpload" in Parse
@@ -221,40 +162,46 @@ public class CreateAdActivity extends AppCompatActivity implements View.OnClickL
                         e.printStackTrace();
                     }
 
-                    objectID = imgupload.getObjectId();
-                    Log.d("Bk:", "ObjectID:" + objectID);
-
+                    String ObjectID = imgupload.getObjectId();
+                    Log.d("Bk:", "ObjectID:" + ObjectID);
 
                     //Toast.makeText(getApplicationContext(), objectID, Toast.LENGTH_LONG).show();
                     // Show a simple toast message
                     Toast.makeText(CreateAdActivity.this, "Image Uploaded",
                             Toast.LENGTH_SHORT).show();
-                }
-                else {}
 
-                //insert ad info locally. This is always done regardless if the ad is yours or not
-                dbHandler.open();
-                long rowID = dbHandler.insertAd(Title, Name, Details, ImageUrl, phone, isMyAd,image,objectID);
-                long adID = dbHandler.selectLastInsearted();
-                dbHandler.close();
+                    // changing image to a BitMap
+                    adImage.setDrawingCacheEnabled(true);
+                    adImage.buildDrawingCache();
+                    Bitmap bm = adImage.getDrawingCache();
 
-                Toast.makeText(getApplicationContext(), "Inserted to AD_ID="+adID, Toast.LENGTH_LONG).show();
+                    dbHandler.open();
 
-                if (rowID != -1) {
-                    Intent intent = new Intent(this, ContactInfoActivity.class);
-                    intent.putExtra("AD_ID", adID);
-                    startActivity(intent);
+                    //changing image to a Byte stream
+                    byte[] image = dbHandler.getBytes(bm);
+
+                    //insert ad info locally
+                    long rowID = dbHandler.insertAd(Title, Name, Details, ImageUrl, phone, isMyAd,image, ObjectID);
+                    long adID = dbHandler.selectLastInsearted();
+                    dbHandler.close();
+
+                    Toast.makeText(getApplicationContext(), "Inserted to AD_ID="+adID, Toast.LENGTH_LONG).show();
+
+                    if (rowID != -1) {
+                        Intent intent = new Intent(this, ContactInfoActivity.class);
+                        intent.putExtra("AD_ID", adID);
+                        startActivity(intent);
+                    }
+                    else{
+                        Toast.makeText(getApplicationContext(), "Error Inserting Data. Please Try Again", Toast.LENGTH_LONG).show();
+                    }
+                    break;
                 }
-                else{
-                    Toast.makeText(getApplicationContext(), "Error Inserting Data. Please Try Again", Toast.LENGTH_LONG).show();
-                }
-                break;
             }
         }
-    }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == RESULT_OK ) {
+        if (resultCode == RESULT_OK) {
             if (requestCode == SELECT_PICTURE) {
                 Uri selectedImageUri = data.getData();
                 selectedImagePath = getPath(selectedImageUri);
@@ -272,46 +219,31 @@ public class CreateAdActivity extends AppCompatActivity implements View.OnClickL
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 // Compress image to lower quality scale 1 - 100
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 20, stream);
-                image = stream.toByteArray();
-                //Bharath how do I uncompress
-                adImage.setImageBitmap(dbHandler.getImage(retrieveImage));
+                byte[] image = stream.toByteArray();
+
+                // Create the ParseFile
+                ParseFile file = new ParseFile("adpic.jpg", image);
+                // Upload the image into Parse Cloud
+                try {
+                    file.save();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                //IMAGE URL, Moataz you can use this url to download a copy to the database
+                String image_url = file.getUrl();
+                adImageUrl.setText(image_url);
+
+                Toast.makeText(CreateAdActivity.this, "Image Uploaded",
+                        Toast.LENGTH_SHORT).show();
+
+                //set global variable
+                imageUploadFile = file;
 
             }
         }
     }
-    /**
-     * helper to set retrieve objects : retrieveResult and retrieveImageMap
-     */
-    public void RetrieveParseObjects(String ObjectID) {
 
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("Ad_info_test2");
-        query.getInBackground(ObjectID, new GetCallback<ParseObject>() {
-            public void done(ParseObject object, ParseException e) {
-                if (e == null) {
-                    // object will be your imgupload ParseObject
-                    retrieveObject = object;
-
-                    // get the image bitmap from retrieveResult
-                    ParseFile imageFile = (ParseFile) retrieveObject.get("ImageFile");
-
-
-                    imageFile.getDataInBackground(new GetDataCallback() {
-                        public void done(byte[] data, ParseException e) {
-                            if (e == null) {
-                                // data has the bytes for the image
-                                retrieveImage = data;
-                            } else {
-                                // something went wrong
-                            }
-                        }
-                    });
-                } else {
-                    // something went wrong
-                }
-            }
-        });
-
-    }
     /**
      * helper to retrieve the path of an image URI
      */
