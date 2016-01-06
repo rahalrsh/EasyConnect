@@ -9,7 +9,6 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import org.ndeftools.Message;
-import org.ndeftools.boilerplate.DefaultNfcReaderActivity;
 import org.ndeftools.boilerplate.NdefRecordAdapter;
 import org.ndeftools.util.activity.NfcReaderActivity;
 import org.ndeftools.wellknown.TextRecord;
@@ -19,7 +18,7 @@ import org.ndeftools.wellknown.TextRecord;
  */
 public class NfcTagReaderActivity extends NfcReaderActivity {
 
-    private static final String TAG = DefaultNfcReaderActivity.class.getName();
+    private static final String TAG = NfcTagReaderActivity.class.getName();
 
     protected Message message;
 

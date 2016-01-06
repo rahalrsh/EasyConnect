@@ -107,9 +107,6 @@ public class FBFragment extends Fragment {
             profilePicBitmap.compress(Bitmap.CompressFormat.PNG, 100, bos);
             img = bos.toByteArray();
 
-            dbHandler.open();
-            dbHandler.insertFBDataInRowOne(img,firstName,lastName,FBLink,FBuid);
-            dbHandler.close();
         }
     }
 
