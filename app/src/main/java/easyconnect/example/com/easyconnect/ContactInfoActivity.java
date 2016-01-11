@@ -99,7 +99,7 @@ public class ContactInfoActivity extends AppCompatActivity implements OnClickLis
         builder.setMessage(R.string.are_you_sure)
                 .setPositiveButton(R.string.fire, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        // FIRE ZE MISSILES!
+                        // Link GO!
                         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://twitter.com/intent/user?screen_name=drevil"));
                         startActivity(browserIntent);
                     }
