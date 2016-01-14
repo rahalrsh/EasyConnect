@@ -35,7 +35,7 @@ import java.io.IOException;
 public class CreateAdActivity extends AppCompatActivity implements View.OnClickListener{
 
     int isMyAd = 1;
-    Button button;
+    Button uploadImageButton;
     // this is the action code we use in our intent
     // this way we know we're looking at the response from our own action
     private static final int SELECT_PICTURE = 1;
@@ -74,6 +74,8 @@ public class CreateAdActivity extends AppCompatActivity implements View.OnClickL
         adDetails = (TextView) findViewById(R.id.adDetails);
         adImageUrl = (TextView) findViewById(R.id.adImageUrl);
         adImage = (ImageView)findViewById(R.id.adImage);
+        // Locate the button in main.xml
+        uploadImageButton = (Button) findViewById(R.id.uploadbtn);
 
         Intent intent = getIntent();
         ComponentName caller = getCallingActivity();
@@ -92,36 +94,32 @@ public class CreateAdActivity extends AppCompatActivity implements View.OnClickL
             adTitle.setEnabled(false);
             adDetails.setText(intent.getStringExtra("ad_description"));
             adDetails.setEnabled(false);
-            adImageUrl.setText(intent.getStringExtra("image_url"));
+            // for now just hard code the default image url , otherwise picassa will crash
+            adImageUrl.setText("http://www.bestbuy.ca/multimedia/Products/500x500/103/10399/10399242.jpg");
             adImageUrl.setEnabled(false);
+            uploadImageButton.setVisibility(View.GONE);
 
             //If we are using NFC the Image is getting loaded from parse. This function sets the retrieveParseObject and retrieveImage
-            // Global variables. We can then use them to populate the local DB- Nisal i'm assuming object_id is returned by ur NFC class
-            RetrieveParseObjects(intent.getStringExtra("object_id"));
-            adImage.setImageBitmap(dbHandler.getImage(retrieveImage));
-            objectID = intent.getStringExtra("object_id");
+            RetrieveParseObjects(intent.getStringExtra("ad_objectID"));
+
+            objectID = intent.getStringExtra("ad_objectID");
         }
 
-        // Locate the button in main.xml
-        button = (Button) findViewById(R.id.uploadbtn);
-
         // Capture button clicks
-        button.setOnClickListener(new View.OnClickListener() {
+        uploadImageButton.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View arg0) {
 
                 // in onCreate or any event where your want the user to
                 // select a file
                 //You can only Upload if you are creating not if you are extracting NFC info
-                if (isMyAd == 1)
-                {
+                if (isMyAd == 1) {
                     Intent intent = new Intent();
                     intent.setType("image/*");
                     intent.setAction(Intent.ACTION_GET_CONTENT);
                     startActivityForResult(Intent.createChooser(intent,
                             "Select Picture"), SELECT_PICTURE);
                 }
-                else{}
             }
         });
     }
@@ -179,7 +177,7 @@ public class CreateAdActivity extends AppCompatActivity implements View.OnClickL
                 //changing bitmap to a Byte stream and then byte array
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 // Compress image to lower quality scale 1 - 100
-                // bitmap.compress(Bitmap.CompressFormat.JPEG, 20, stream);
+                 bitmap.compress(Bitmap.CompressFormat.JPEG, 20, stream);
                 //changing image to a Byte stream
                 image = dbHandler.getBytes(bitmap);
 
@@ -230,7 +228,6 @@ public class CreateAdActivity extends AppCompatActivity implements View.OnClickL
                     Toast.makeText(CreateAdActivity.this, "Image Uploaded",
                             Toast.LENGTH_SHORT).show();
                 }
-                else {}
 
                 //insert ad info locally. This is always done regardless if the ad is yours or not
                 dbHandler.open();
@@ -300,6 +297,7 @@ public class CreateAdActivity extends AppCompatActivity implements View.OnClickL
                             if (e == null) {
                                 // data has the bytes for the image
                                 retrieveImage = data;
+                                adImage.setImageBitmap(dbHandler.getImage(retrieveImage));
                             } else {
                                 // something went wrong
                             }

@@ -129,8 +129,8 @@ public class ContactInfoActivity extends AppCompatActivity implements OnClickLis
             }
             case R.id.nfcConnect: {
                 Intent intent = new Intent(ContactInfoActivity.this, NfcTagWriterActivity.class);
-                // Format here is [contact_name]|[phone_number]|[ad_title]|[ad_description]|[image_url]
-                intent.putExtra("AD_Info",c.getString(1)+"|"+ c.getString(4) + "|" + c.getString(0) + "|" +c.getString(2)+"|"+c.getString(3));
+                // Format here is [contact_name]|[phone_number]|[ad_title]|[ad_description]|[ad_objectID]
+                intent.putExtra("AD_Info",c.getString(1)+"|"+ c.getString(4) + "|" + c.getString(0) + "|" +c.getString(2)+"|"+c.getString(7));
                 startActivityForResult(intent, 0);
                 break;
             }
