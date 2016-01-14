@@ -1,10 +1,15 @@
 package easyconnect.example.com.easyconnect;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.nfc.NdefMessage;
+import android.nfc.NfcAdapter;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.Gravity;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -29,6 +34,37 @@ public class NfcTagWriterActivity extends org.ndeftools.util.activity.NfcTagWrit
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_nfcwriter);
+
+        // check to see if NFC is enabled on the device
+        NfcAdapter mNfcAdapter= android.nfc.NfcAdapter.getDefaultAdapter(this);
+
+        if (!mNfcAdapter.isEnabled()) {
+
+            AlertDialog.Builder alertbox = new AlertDialog.Builder(this);
+            alertbox.setTitle("Please Turn On NFC");
+            alertbox.setMessage("Start using Tag Writer/Reader, NFC Beam features");
+            alertbox.setPositiveButton("Turn On", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                        Intent intent = new Intent(Settings.ACTION_NFC_SETTINGS);
+                        startActivity(intent);
+                    } else {
+                        Intent intent = new Intent(Settings.ACTION_WIRELESS_SETTINGS);
+                        startActivity(intent);
+                    }
+                }
+            });
+            alertbox.setNegativeButton("Close", new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                }
+            });
+            alertbox.show();
+
+        }
 
         Intent intent = getIntent();
         adInfo = intent.getStringExtra("AD_Info");
