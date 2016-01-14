@@ -68,7 +68,7 @@
             android:layout_centerHorizontal="true"
             android:layout_gravity="bottom|right"
             android:layout_marginBottom="8dip"
-            android:src="@drawable/messages_icon" />
+            android:src="@drawable/add_icon" />
 
         <!-- comment for now
       <at.markushi.ui.CircleButton
