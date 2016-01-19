@@ -74,7 +74,6 @@ public class FBFragment extends Fragment {
         @Override
         public void onSuccess(LoginResult loginResult) {
             AccessToken accessToken= loginResult.getAccessToken();
-            Log.i("rahal", "*"+loginResult.getAccessToken().toString());
             Profile profile = Profile.getCurrentProfile();
             displayWelcomeMessage(profile);
             Toast.makeText(getActivity(), "Login to Facebook was successful", Toast.LENGTH_SHORT).show();

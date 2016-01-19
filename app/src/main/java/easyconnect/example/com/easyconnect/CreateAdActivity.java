@@ -1,7 +1,9 @@
 package easyconnect.example.com.easyconnect;
 
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -56,6 +58,7 @@ public class CreateAdActivity extends AppCompatActivity implements View.OnClickL
     // the adImage ImageView in bytes
     byte[] image;
 
+    SharedPreferences sharedPrefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,6 +106,25 @@ public class CreateAdActivity extends AppCompatActivity implements View.OnClickL
             RetrieveParseObjects(intent.getStringExtra("ad_objectID"));
 
             objectID = intent.getStringExtra("ad_objectID");
+        }
+
+        else{
+            // User is creating this add.
+            // Check ShredPreferenced and auto fill user information if available
+
+            sharedPrefs = this.getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+            String firstName = sharedPrefs.getString("firstName", "");
+            String lastName = sharedPrefs.getString("lastName", "");
+            String UserPhoneNumber =  sharedPrefs.getString("phoneNumber", "");
+            String UserFullName="";
+            if (!firstName.isEmpty() || !lastName.isEmpty()){
+                UserFullName = firstName + " " + lastName;
+            }
+
+            if(!UserFullName.isEmpty())
+                fullName.setText(UserFullName);
+            if(!UserPhoneNumber.isEmpty())
+                phoneNumber.setText(UserPhoneNumber);
         }
 
         // Capture button clicks
@@ -172,8 +194,6 @@ public class CreateAdActivity extends AppCompatActivity implements View.OnClickL
                 adImage.buildDrawingCache();
                 Bitmap bitmap = adImage.getDrawingCache();
 
-
-
                 //changing bitmap to a Byte stream and then byte array
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 // Compress image to lower quality scale 1 - 100
@@ -195,6 +215,7 @@ public class CreateAdActivity extends AppCompatActivity implements View.OnClickL
                     //IMAGE URL, Moataz you can use this url to download a copy to the database
                     String image_url = file.getUrl();
                     adImageUrl.setText(image_url);
+                    ImageUrl = adImageUrl.getText().toString();
 
                     //set global variable
                     imageUploadFile = file;
