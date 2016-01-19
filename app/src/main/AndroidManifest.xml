@@ -45,6 +45,10 @@
             android:label="@string/title_activity_my_ads_list"
             android:parentActivityName=".ContactListActivity"/>
         <activity
+            android:name=".MyProfileActivity"
+            android:label="@string/title_activity_my_profile"
+            android:parentActivityName=".ContactListActivity"/>
+        <activity
             android:name=".NfcTagReaderActivity"
             android:label="@string/title_activity_nfc_tagreader"
             android:parentActivityName=".ContactInfoActivity">

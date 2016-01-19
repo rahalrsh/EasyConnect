@@ -211,15 +211,20 @@ public class ContactListActivity extends AppCompatActivity implements View.OnCli
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.my_ads) {
+        switch (item.getItemId()){
+            case R.id.my_ads: {
+                // After deleting the advertisement from the db, go back to the ListActivity
+                Intent intent = new Intent(this, MyAdsListActivity.class);
+                startActivity(intent);
+                break;
+            }
 
-            // After deleting the advertisement from the db, go back to the ListActivity
-            Intent intent = new Intent(this, MyAdsListActivity.class);
-            startActivity(intent);
-            return true;
+            case R.id.my_profile: {
+                Intent intent = new Intent(this, MyProfileActivity.class);
+                startActivity(intent);
+                break;
+            }
         }
 
         return super.onOptionsItemSelected(item);

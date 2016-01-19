@@ -3,4 +3,6 @@
     tools:context="easyconnect.example.com.easyconnect.ContactListActivity">
     <item android:id="@+id/my_ads" android:title="@string/my_ads"
         android:orderInCategory="100" android:showAsAction="never" />
+    <item android:id="@+id/my_profile" android:title="@string/my_profile"
+        android:orderInCategory="100" android:showAsAction="never" />
 </menu>

@@ -21,9 +21,46 @@
         android:id="@+id/profile_link"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/login_button"
+        android:layout_above="@+id/my_first_name"
         android:layout_centerHorizontal="true"
         android:gravity="center" />
+
+    <EditText
+        android:id="@+id/my_first_name"
+        android:hint="First Name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/my_last_name"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal" />
+
+    <EditText
+        android:id="@+id/my_last_name"
+        android:hint="Last Name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/my_phone"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal" />
+
+    <EditText
+        android:id="@+id/my_phone"
+        android:hint="Phone Number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/save_my_profile_button"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal" />
+
+    <Button
+        android:id="@+id/save_my_profile_button"
+        android:text="Save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/login_button"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal" />
+
 
     <com.facebook.login.widget.LoginButton
         android:id="@+id/login_button"
@@ -33,6 +70,7 @@
         android:layout_marginBottom="30dp"
         android:layout_marginTop="30dp"
         facebook:com_facebook_login_text="LOGIN"
-        facebook:com_facebook_logout_text="LOGOUT"/>/>
+        facebook:com_facebook_logout_text="LOGOUT"/>
+
 
 </RelativeLayout>
