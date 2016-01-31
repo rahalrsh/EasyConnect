@@ -2,11 +2,15 @@ package easyconnect.example.com.easyconnect;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.parse.ParseException;
+import com.parse.ParseObject;
 
 import org.ndeftools.Message;
 import org.ndeftools.boilerplate.NdefRecordAdapter;
@@ -60,12 +64,41 @@ public class NfcTagReaderActivity extends NfcReaderActivity {
         intent.putExtra("contact_name",separated[0]);
         intent.putExtra("phone_number",separated[1]);
         intent.putExtra("ad_title",separated[2]);
-        intent.putExtra("ad_description",separated[3]);
-        intent.putExtra("ad_objectID",separated[4]);
+        intent.putExtra("ad_description", separated[3]);
+        intent.putExtra("ad_objectID", separated[4]);
+        String ObjectId = separated[4];
+        SendDataToBackend(ObjectId);
         startActivityForResult(intent, 0);
+    }
 
-        //Log.d(TAG, "Found " + textRecord.getText() + " NDEF records");
+    /*
+        When the user is reading data from a NFC tag we collect the geological position of the user
+        and send it to a backend server
+     */
+    private void SendDataToBackend(String AdObjId) {
+        final String AdObjectId = AdObjId;
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                UserLocation.updateUserLocation(NfcTagReaderActivity.this);
+                Double latitude = UserLocation.getLatitude();
+                Double longitude = UserLocation.getLongitude();
 
+                ParseObject locationupload = new ParseObject("tap_location");
+                locationupload.put("AdId", ""+AdObjectId);
+                locationupload.put("latitude", ""+latitude);
+                locationupload.put("longitude", ""+longitude);
+
+                Log.i("Loc", "read from tag: objectID=" + AdObjectId);
+
+                try {
+                    locationupload.save();
+                    Log.i("Loc", "saved");
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
 
 

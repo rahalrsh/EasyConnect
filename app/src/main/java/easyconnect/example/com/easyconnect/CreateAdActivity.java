@@ -252,6 +252,7 @@ public class CreateAdActivity extends AppCompatActivity implements View.OnClickL
 
                 //insert ad info locally. This is always done regardless if the ad is yours or not
                 dbHandler.open();
+                Log.i("Loc", "create ad: objectID="+ objectID);
                 long rowID = dbHandler.insertAd(Title, Name, Details, ImageUrl, phone, isMyAd,image,objectID);
                 long adID = dbHandler.selectLastInsearted();
                 dbHandler.close();

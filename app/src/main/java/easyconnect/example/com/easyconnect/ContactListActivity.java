@@ -31,7 +31,6 @@ public class ContactListActivity extends AppCompatActivity implements View.OnCli
 
     DBHandler dbHandler;
     Cursor c;
-    UserLocation userLocation;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -72,8 +71,6 @@ public class ContactListActivity extends AppCompatActivity implements View.OnCli
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
-
-        userLocation = new UserLocation();
     }
 
     /*
@@ -87,7 +84,6 @@ public class ContactListActivity extends AppCompatActivity implements View.OnCli
     @Override
     protected void onResume() {
         super.onResume();
-        userLocation.getUserLocation(this);
 
         ((MyRecyclerViewAdapter) mAdapter).setOnItemClickListener(new MyRecyclerViewAdapter
                 .MyClickListener() {

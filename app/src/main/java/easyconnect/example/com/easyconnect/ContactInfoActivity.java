@@ -8,10 +8,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,9 +41,13 @@ public class ContactInfoActivity extends AppCompatActivity implements OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_info);
 
-        dbHandler = new DBHandler(getBaseContext());
+        // get extras
         Intent intent = getIntent();
         adID = intent.getLongExtra("AD_ID", 1L);
+        boolean isMyAd = intent.getBooleanExtra("myAd", false);
+        Log.i("myAD", ""+ isMyAd);
+
+        dbHandler = new DBHandler(getBaseContext());
         dbHandler.open();
         c = dbHandler.searchAdbyID(adID);
         c.moveToFirst();
@@ -81,6 +87,23 @@ public class ContactInfoActivity extends AppCompatActivity implements OnClickLis
         LinkedInButton = (ImageView) findViewById(R.id.linkedin_button);
         LinkedInButton.setOnClickListener(this);
         dbHandler.close();
+
+
+        FloatingActionButton mapInfoButton = (FloatingActionButton)findViewById(R.id.mapInfo);
+
+        mapInfoButton.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+                Log.i("map button", "show map");
+            }
+        });
+
+        // Demonically SHOW button
+        // Show only for my ads
+        // By default this button in invisible
+        if (isMyAd) {
+            // SHOW the button
+            mapInfoButton.setVisibility(View.VISIBLE);
+        }
     }
 
 
@@ -134,7 +157,6 @@ public class ContactInfoActivity extends AppCompatActivity implements OnClickLis
                 startActivityForResult(intent, 0);
                 break;
             }
-
         }
     }
 

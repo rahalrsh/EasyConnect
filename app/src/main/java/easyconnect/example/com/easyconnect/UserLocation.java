@@ -6,14 +6,19 @@ import android.location.LocationManager;
 import android.util.Log;
 
 public class UserLocation {
-    LocationManager locationManager;
-    boolean gps_enabled=false;
-    boolean network_enabled=false;
-    boolean passive_enabled=false;
-    Location location;
 
-    public void getUserLocation(Context context)
+    private static double latitude=0;
+    private static double longitude=0;
+    private static Location location=null;
+
+    public static void updateUserLocation(Context context)
     {
+        LocationManager locationManager=null;
+        boolean gps_enabled=false;
+        boolean network_enabled=false;
+        boolean passive_enabled=false;
+
+
         //I use LocationResult callback class to pass location value from MyLocation to user code.
         if(locationManager==null)
             locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
@@ -63,28 +68,23 @@ public class UserLocation {
             return;
         }
 
-        double latitude=0;
-        double longitude=0;
         latitude = location.getLatitude();
         longitude = location.getLongitude();
         Log.i("MyLocation", "latitude="+latitude+" "+"longitude="+longitude);
         return;
     }
 
-    /* disabling for now
-    LocationListener locationListenerGps = new LocationListener() {
-        public void onLocationChanged(Location location) {}
-        public void onProviderDisabled(String provider) {}
-        public void onProviderEnabled(String provider) {}
-        public void onStatusChanged(String provider, int status, Bundle extras) {}
-    };
+    public static Double getLatitude(){
+        if(location==null){
+            return null;
+        }
+        return latitude;
+    }
 
-    LocationListener locationListenerNetwork = new LocationListener() {
-        public void onLocationChanged(Location location) {}
-        public void onProviderDisabled(String provider) {}
-        public void onProviderEnabled(String provider) {}
-        public void onStatusChanged(String provider, int status, Bundle extras) {}
-    };
-    */
-
+    public static Double getLongitude(){
+        if(location==null){
+            return null;
+        }
+        return longitude;
+    }
 }
