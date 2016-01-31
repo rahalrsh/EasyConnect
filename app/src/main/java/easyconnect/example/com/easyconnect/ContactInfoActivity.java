@@ -94,6 +94,9 @@ public class ContactInfoActivity extends AppCompatActivity implements OnClickLis
         mapInfoButton.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
                 Log.i("map button", "show map");
+                Intent intent = new Intent(getApplication(), MapActivity.class);
+                startActivity(intent);
+
             }
         });
 

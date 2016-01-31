@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="easyconnect.example.com.easyconnect">
-    <uses-permission android:name="android.permission."/>
+
+    <uses-permission android:name="android.permission." />
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- permission for GPS based location -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <!-- permission for Network based location -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <permission
+        android:name="example.gps.permission.MAPS_RECEIVE"
+        android:protectionLevel="signature"></permission>
+    <uses-permission
+        android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission
+        android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
 
     <application
         android:name=".MyApplication"
@@ -35,28 +43,29 @@
         <activity
             android:name=".ContactInfoActivity"
             android:label="@string/title_activity_contact_info"
-            android:parentActivityName=".ContactListActivity"/>
+            android:parentActivityName=".ContactListActivity" />
         <activity
             android:name=".NfcTagWriterActivity"
             android:label="@string/title_activity_nfc_tagwriter"
-            android:parentActivityName=".ContactInfoActivity"/>
+            android:parentActivityName=".ContactInfoActivity" />
         <activity
             android:name=".MyAdsListActivity"
-            android:label="@string/title_activity_my_ads_list"
-            android:parentActivityName=".ContactListActivity"/>
+            android:label="@string/title_activity_my_ads_list"/>
         <activity
             android:name=".MyProfileActivity"
             android:label="@string/title_activity_my_profile"
-            android:parentActivityName=".ContactListActivity"/>
+            android:parentActivityName=".ContactListActivity" />
         <activity
             android:name=".NfcTagReaderActivity"
             android:label="@string/title_activity_nfc_tagreader"
             android:parentActivityName=".ContactInfoActivity">
-                <intent-filter>
-                    <action android:name="android.nfc.action.NDEF_DISCOVERED"/>
-                    <category android:name="android.intent.category.DEFAULT"/>
-                    <data android:mimeType="text/plain" />
-                </intent-filter>
+            <intent-filter>
+                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="text/plain" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".CreateAdActivity"
@@ -66,11 +75,23 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="easyconnect.example.com.easyconnect.ContactListActivity" />
         </activity>
-        <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
-             App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+
+        <activity
+            android:name=".MapActivity"
+            android:label="@string/title_activity_map">
+        </activity>
+        <!--
+             ATTENTION: This was auto-generated to add Google Play services to your project for
+             App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
+        -->
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyCCRL_V8pvetLedMcFVLq4X4FGc43y1hL4" />
+
     </application>
 
 </manifest>

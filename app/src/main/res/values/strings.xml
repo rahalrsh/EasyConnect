@@ -24,5 +24,6 @@
     <string name="my_profile">My Profile</string>
 
     <string name="nfcinstructions">Tap on the buttons </string>
+    <string name="title_activity_map">Location Information</string>
 
 </resources>
