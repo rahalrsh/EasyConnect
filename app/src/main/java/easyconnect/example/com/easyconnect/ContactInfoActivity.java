@@ -8,15 +8,16 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Button;
+import android.util.Log;
+
 
 
 public class ContactInfoActivity extends AppCompatActivity implements OnClickListener {
@@ -41,13 +42,9 @@ public class ContactInfoActivity extends AppCompatActivity implements OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_info);
 
-        // get extras
+        dbHandler = new DBHandler(getBaseContext());
         Intent intent = getIntent();
         adID = intent.getLongExtra("AD_ID", 1L);
-        boolean isMyAd = intent.getBooleanExtra("myAd", false);
-        Log.i("myAD", ""+ isMyAd);
-
-        dbHandler = new DBHandler(getBaseContext());
         dbHandler.open();
         c = dbHandler.searchAdbyID(adID);
         c.moveToFirst();
@@ -103,10 +100,10 @@ public class ContactInfoActivity extends AppCompatActivity implements OnClickLis
         // Demonically SHOW button
         // Show only for my ads
         // By default this button in invisible
-        if (isMyAd) {
+    //    if (isMyAd) {
             // SHOW the button
-            mapInfoButton.setVisibility(View.VISIBLE);
-        }
+       //     mapInfoButton.setVisibility(View.VISIBLE);
+      //  }
     }
 
 
@@ -155,11 +152,12 @@ public class ContactInfoActivity extends AppCompatActivity implements OnClickLis
             }
             case R.id.nfcConnect: {
                 Intent intent = new Intent(ContactInfoActivity.this, NfcTagWriterActivity.class);
-                // Format here is [contact_name]|[phone_number]|[ad_title]|[ad_description]|[ad_objectID]
-                intent.putExtra("AD_Info",c.getString(1)+"|"+ c.getString(4) + "|" + c.getString(0) + "|" +c.getString(2)+"|"+c.getString(7));
+                // Format here is [contact_name]|[phone_number]|[ad_title]|[ad_description]|[image_url]
+                intent.putExtra("AD_Info",c.getString(1)+"|"+ c.getString(4) + "|" + c.getString(0) + "|" +c.getString(2)+"|"+c.getString(3));
                 startActivityForResult(intent, 0);
                 break;
             }
+
         }
     }
 
