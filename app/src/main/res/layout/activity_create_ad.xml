@@ -32,11 +32,10 @@
                 android:weightSum="1">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:id="@+id/adImage"
-                    android:src="@drawable/person_icon"
-                    android:layout_weight="0.71" />
+                    android:src="@drawable/default_img" />
 
             </LinearLayout>
 

@@ -189,20 +189,10 @@ public class CreateAdActivity extends AppCompatActivity implements View.OnClickL
                 String Details = adDetails.getText().toString();
                 String ImageUrl = adImageUrl.getText().toString();
 
-                // changing adImage to a BitMap
-                adImage.setDrawingCacheEnabled(true);
-                adImage.buildDrawingCache();
-                Bitmap bitmap = adImage.getDrawingCache();
-
-                //changing bitmap to a Byte stream and then byte array
-                ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                // Compress image to lower quality scale 1 - 100
-                 bitmap.compress(Bitmap.CompressFormat.JPEG, 20, stream);
-                //changing image to a Byte stream
-                image = dbHandler.getBytes(bitmap);
 
                 // Do the following if you are creating an ad
                 if(isMyAd == 1) {
+                    adimagetobitmap();
                     // Create the ParseFile
                     ParseFile file = new ParseFile("adpic.jpg", image);
                     // Upload the Default image into Parse Cloud
@@ -250,11 +240,30 @@ public class CreateAdActivity extends AppCompatActivity implements View.OnClickL
                             Toast.LENGTH_SHORT).show();
                 }
 
+
+
                 //insert ad info locally. This is always done regardless if the ad is yours or not
+                long rowID;
+                long adID;
                 dbHandler.open();
+
+                if(isMyAd ==0 ){
+
+                    RetrieveParseObjects(objectID);
+
+                    adimagetobitmap();
+
+                    Log.i("Loc", "collect ad: objectID="+ objectID);
+                    rowID = dbHandler.insertAd(Title, Name, Details, ImageUrl, phone, isMyAd,image,objectID);
+                    adID = dbHandler.selectLastInsearted();
+
+                }
+                else{
+
                 Log.i("Loc", "create ad: objectID="+ objectID);
-                long rowID = dbHandler.insertAd(Title, Name, Details, ImageUrl, phone, isMyAd,image,objectID);
-                long adID = dbHandler.selectLastInsearted();
+                 rowID = dbHandler.insertAd(Title, Name, Details, ImageUrl, phone, isMyAd,image,objectID);
+                    adID = dbHandler.selectLastInsearted();
+                }
                 dbHandler.close();
 
                 Toast.makeText(getApplicationContext(), "Inserted to AD_ID="+adID, Toast.LENGTH_LONG).show();
@@ -353,6 +362,19 @@ public class CreateAdActivity extends AppCompatActivity implements View.OnClickL
         }
         // this is our fallback here
         return uri.getPath();
+    }
+    private void adimagetobitmap() {
+        // changing adImage to a BitMap
+        adImage.setDrawingCacheEnabled(true);
+        adImage.buildDrawingCache();
+        Bitmap bitmap = adImage.getDrawingCache();
+
+        //changing bitmap to a Byte stream and then byte array
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        // Compress image to lower quality scale 1 - 100
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 20, stream);
+        //changing image to a Byte stream
+        image = dbHandler.getBytes(bitmap);
     }
 
     private Bitmap getBitmapFromUri(Uri uri) throws IOException {

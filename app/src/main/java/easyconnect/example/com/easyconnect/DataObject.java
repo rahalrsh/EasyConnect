@@ -1,5 +1,7 @@
 package easyconnect.example.com.easyconnect;
 
+import android.widget.ImageView;
+
 /**
  * Created by nisalperera on 15-09-05.
  *
@@ -17,6 +19,7 @@ public class DataObject {
         mText2 = text2;
         ad_id = id;
         imageURL = URL;
+
     }
 
     public String getmText1() {
