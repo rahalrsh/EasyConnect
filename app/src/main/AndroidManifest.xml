@@ -28,13 +28,9 @@
 
         <activity
             android:name=".ContactListActivity"
-            android:label="@string/app_name">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:label="@string/app_name"
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        />
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
@@ -50,7 +46,12 @@
             android:parentActivityName=".ContactInfoActivity" />
         <activity
             android:name=".MyAdsListActivity"
-            android:label="@string/title_activity_my_ads_list"/>
+            android:label="@string/title_activity_my_ads_list">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter></activity>
         <activity
             android:name=".MyProfileActivity"
             android:label="@string/title_activity_my_profile"

@@ -28,9 +28,9 @@ public class ContactInfoActivity extends AppCompatActivity implements OnClickLis
     ImageView ad_pic;
 
     //TODO: integrate social media
-    ImageView TwitterButton;
-    ImageView LinkedInButton;
-    ImageView FacebookButton;
+  //  ImageView TwitterButton;
+   // ImageView LinkedInButton;
+  //  ImageView FacebookButton;
 
     DBHandler dbHandler;
     Cursor c;
@@ -73,16 +73,16 @@ public class ContactInfoActivity extends AppCompatActivity implements OnClickLis
         ad_pic.setImageBitmap(dbHandler.getImage(c.getBlob(6)));
 
         //Initialize links
-        FacebookButton = (ImageView) findViewById(R.id.facebook_button);
-        FacebookButton.setOnClickListener(this);
+        // FacebookButton = (ImageView) findViewById(R.id.facebook_button);
+    //    FacebookButton.setOnClickListener(this);
 
 
-        TwitterButton = (ImageView) findViewById(R.id.twitter_button);
-        TwitterButton.setOnClickListener(this);
+        //TwitterButton = (ImageView) findViewById(R.id.twitter_button);
+    //    TwitterButton.setOnClickListener(this);
 
 
-        LinkedInButton = (ImageView) findViewById(R.id.linkedin_button);
-        LinkedInButton.setOnClickListener(this);
+        //LinkedInButton = (ImageView) findViewById(R.id.linkedin_button);
+      //  LinkedInButton.setOnClickListener(this);
         dbHandler.close();
 
 
@@ -137,7 +137,7 @@ public class ContactInfoActivity extends AppCompatActivity implements OnClickLis
         // Create the AlertDialog object and return it
         message = builder.create();
 
-        switch (selected.getId()) {
+       /* switch (selected.getId()) {
             case R.id.facebook_button: {
                 message.show();
                 break;
@@ -158,7 +158,7 @@ public class ContactInfoActivity extends AppCompatActivity implements OnClickLis
                 break;
             }
 
-        }
+        }*/
     }
 
         @Override

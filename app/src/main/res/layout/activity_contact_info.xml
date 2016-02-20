@@ -1,4 +1,38 @@
-<ScrollView
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:circle="http://schemas.android.com/apk/res-auto"
+    xmlns:facebook="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin">
+
+<android.support.design.widget.FloatingActionButton
+    android:id="@+id/nfcConnect"
+    android:layout_width="64dip"
+    android:layout_height="64dip"
+    circle:backgroundTint="#009688"
+    android:layout_gravity="center_horizontal|bottom|right"
+    android:src="@drawable/find_person_icon"
+    android:layout_row="2"
+    android:layout_column="0"
+    android:layout_alignEnd="@+id/gridLayout"
+    android:layout_alignBottom="@+id/gridLayout" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/mapInfo"
+        android:layout_width="64dip"
+        android:layout_height="64dip"
+        circle:backgroundTint="#009688"
+        android:layout_gravity="right|top"
+        android:src="@drawable/map_icon"
+        android:visibility="invisible"
+        android:layout_alignParentEnd="true" />
+
+    <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:circle="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
@@ -14,6 +48,8 @@
         tools:context="easyconnect.example.com.easyconnect.ContactInfoActivity"
         android:id="@+id/contactlayout">
 
+
+
         <GridLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -22,14 +58,16 @@
             android:layout_alignParentEnd="true">
 
             <ImageView
-                android:layout_width="269dp"
-                android:layout_height="205dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:id="@+id/ad_pic"
                 android:layout_row="0"
                 android:layout_column="0"
                 android:src="@drawable/default_img"
-                android:layout_gravity="center|fill"
-                android:focusableInTouchMode="false" />
+                android:layout_gravity="center|fill|bottom"
+                android:focusableInTouchMode="false"
+                android:layout_marginTop="-55dp"
+                android:layout_marginBottom="-40dp" />
 
             <TextView
                 android:layout_width="279dp"
@@ -40,31 +78,9 @@
                 android:layout_column="0"
                 android:textAlignment="center"
                 android:gravity="center_horizontal|fill_vertical"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="279dp"
-                android:layout_height="37dp"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:layout_row="2"
-                android:layout_column="0"
-                android:textAlignment="center"
-                android:text="Advertiser"
-                android:textColor="@color/abc_secondary_text_material_light"
-                android:singleLine="true" />
-
-            <TextView
-                android:layout_width="279dp"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:id="@+id/contact_name"
-                android:layout_row="3"
-                android:layout_column="0"
-                android:textAlignment="textStart"
-                android:enabled="true"
-                android:autoLink="phone"
-                android:layout_marginBottom="5dp"
-                android:drawableBottom="@android:color/black"/>
+                android:textStyle="bold"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="-10dp" />
 
             <TextView
                 android:layout_width="279dp"
@@ -73,110 +89,83 @@
                 android:layout_row="4"
                 android:layout_column="0"
                 android:textAlignment="center"
+                android:text="Advertiser"
+                android:textColor="@color/abc_secondary_text_material_light"
+                android:singleLine="true"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="10dp" />
+
+            <TextView
+                android:layout_width="279dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/contact_name"
+                android:layout_row="5"
+                android:layout_column="0"
+                android:textAlignment="textStart"
+                android:enabled="true"
+                android:autoLink="phone"
+                android:layout_marginBottom="10dp"
+                android:drawableBottom="@android:color/black"
+                android:layout_marginLeft="10dp" />
+
+            <TextView
+                android:layout_width="279dp"
+                android:layout_height="37dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_row="6"
+                android:layout_column="0"
+                android:textAlignment="center"
                 android:text="Phone Number"
                 android:textColor="@color/abc_secondary_text_material_light"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="10dp" />
 
             <TextView
                 android:layout_width="279dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:id="@+id/phone_number"
-                android:layout_row="5"
+                android:layout_row="7"
                 android:layout_column="0"
                 android:textAlignment="textStart"
                 android:enabled="true"
                 android:autoLink="phone"
-                android:layout_marginBottom="5dp"
-                android:drawableBottom="@android:color/black"/>
+                android:layout_marginBottom="10dp"
+                android:drawableBottom="@android:color/black"
+                android:layout_marginLeft="10dp" />
 
             <TextView
                 android:layout_width="279dp"
                 android:layout_height="37dp"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Description"
-                android:layout_row="6"
+                android:layout_row="8"
                 android:layout_column="0"
                 android:textAlignment="center"
                 android:textColor="@color/abc_secondary_text_material_light"
 
-                android:drawableBottom="@android:color/black"/>
+                android:drawableBottom="@android:color/black"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="10dp" />
 
             <TextView
                 android:layout_width="279dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:id="@+id/ad_description"
-                android:layout_row="7"
+                android:layout_row="9"
                 android:layout_column="0"
                 android:textAlignment="textStart"
-                android:layout_marginBottom="5dp" />
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp" />
 
         </GridLayout>
 
-        <GridLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true"
-            android:id="@+id/gridLayout2">
-
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="50dp"
-                android:id="@+id/twitter_button"
-                android:layout_row="0"
-                android:layout_column="0"
-                android:src="@drawable/twitter_icon"
-                android:layout_gravity="left"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentStart="true" />
-
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="50dp"
-                android:id="@+id/facebook_button"
-                android:layout_row="1"
-                android:layout_column="0"
-                android:src="@drawable/social_facebook_box_blue"
-                android:layout_gravity="left" />
-
-            <ImageView
-                android:layout_width="35dp"
-                android:layout_height="50dp"
-                android:id="@+id/linkedin_button"
-                android:layout_row="2"
-                android:layout_column="0"
-                android:src="@drawable/ln"
-                android:layout_gravity="left" />
-
-        </GridLayout>
-
-
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/nfcConnect"
-            android:layout_width="64dip"
-            android:layout_height="64dip"
-            circle:backgroundTint="#009688"
-            android:layout_gravity="bottom|left"
-            android:src="@drawable/find_person_icon"
-            android:layout_marginTop="27dp"
-            android:layout_below="@+id/gridLayout2"
-            android:layout_alignParentStart="true" />
-
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/mapInfo"
-            android:layout_width="64dip"
-            android:layout_height="64dip"
-            circle:backgroundTint="#009688"
-            android:layout_gravity="bottom|left"
-            android:src="@drawable/map_icon"
-            android:layout_marginTop="27dp"
-            android:layout_below="@+id/nfcConnect"
-            android:layout_alignParentStart="true"
-            android:visibility="invisible"/>
 
     </RelativeLayout>
 
 </ScrollView>
 
+</FrameLayout>
