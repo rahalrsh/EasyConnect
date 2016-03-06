@@ -92,6 +92,7 @@ public class MyAdsListActivity extends AppCompatActivity implements View.OnClick
                 Intent intent = new Intent(MyAdsListActivity.this, ContactInfoActivity.class);
                 // put the dummy contact info as an extra field
                 DataObject cur = (DataObject) results.get(position);
+                intent.putExtra("myAd", true);
                 intent.putExtra("AD_ID", cur.getadId());
                 startActivity(intent);
             }
@@ -115,6 +116,7 @@ public class MyAdsListActivity extends AppCompatActivity implements View.OnClick
                 Log.i("printDBInfo", "Image Url: " + c.getString(4));
                 Log.i("printDBInfo", "Phone: " + c.getInt(5));
                 Log.i("printDBInfo", "is My Ad: " + c.getInt(6));
+                Log.i("printDBInfo", "ObjId: " + c.getString(8));
                 int isMyAd = Integer.parseInt(c.getString(6));
 
                 // Only add my ads

@@ -123,7 +123,7 @@ public class ContactListActivity extends AppCompatActivity implements View.OnCli
                 Log.i("printDBInfo", "Image Url: " + c.getString(4));
                 Log.i("printDBInfo", "Phone: " + c.getInt(5));
                 Log.i("printDBInfo", "isMyAd: " + c.getInt(6));
-                Log.i("printDBInfo", "ObjId: " + c.getString(8));
+                Log.i("printDBInfo CL", "ObjId: " + c.getString(8));
                 int isMyAd = Integer.parseInt(c.getString(6));
 
                 if (isMyAd == 0) {

@@ -59,14 +59,16 @@ public class NfcTagReaderActivity extends NfcReaderActivity {
         // process message
 
         //
-        // [contact_name]|[phone_number]|[ad_title]|[ad_description]|[ad_objectID]
+        // [contact_name]|[phone_number]|[ad_title]|[ad_description]|[ad_objectID]|[image_url]
         Intent intent = new Intent(NfcTagReaderActivity.this, CreateAdActivity.class);
         intent.putExtra("contact_name",separated[0]);
         intent.putExtra("phone_number",separated[1]);
         intent.putExtra("ad_title",separated[2]);
         intent.putExtra("ad_description", separated[3]);
         intent.putExtra("ad_objectID", separated[4]);
+        intent.putExtra("image_url", separated[5]);
         String ObjectId = separated[4];
+        Log.i("ObjectID=", ""+ObjectId);
         SendDataToBackend(ObjectId);
         startActivityForResult(intent, 0);
     }

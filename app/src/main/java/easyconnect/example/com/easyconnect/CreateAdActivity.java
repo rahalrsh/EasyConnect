@@ -98,7 +98,7 @@ public class CreateAdActivity extends AppCompatActivity implements View.OnClickL
             adDetails.setText(intent.getStringExtra("ad_description"));
             adDetails.setEnabled(false);
             // for now just hard code the default image url , otherwise picassa will crash
-            adImageUrl.setText("http://www.bestbuy.ca/multimedia/Products/500x500/103/10399/10399242.jpg");
+            adImageUrl.setText(intent.getStringExtra("image_url"));
             adImageUrl.setEnabled(false);
             uploadImageButton.setVisibility(View.GONE);
 
@@ -260,8 +260,8 @@ public class CreateAdActivity extends AppCompatActivity implements View.OnClickL
                 }
                 else{
 
-                Log.i("Loc", "create ad: objectID="+ objectID);
-                 rowID = dbHandler.insertAd(Title, Name, Details, ImageUrl, phone, isMyAd,image,objectID);
+                    Log.i("Loc", "create ad: objectID="+ objectID);
+                    rowID = dbHandler.insertAd(Title, Name, Details, ImageUrl, phone, isMyAd,image,objectID);
                     adID = dbHandler.selectLastInsearted();
                 }
                 dbHandler.close();

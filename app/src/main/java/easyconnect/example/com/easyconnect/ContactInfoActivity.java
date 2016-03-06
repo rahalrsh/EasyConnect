@@ -44,6 +44,7 @@ public class ContactInfoActivity extends AppCompatActivity implements OnClickLis
 
         dbHandler = new DBHandler(getBaseContext());
         Intent intent = getIntent();
+        boolean isMyAd = intent.getBooleanExtra("myAd", false);
         adID = intent.getLongExtra("AD_ID", 1L);
         dbHandler.open();
         c = dbHandler.searchAdbyID(adID);
@@ -100,10 +101,10 @@ public class ContactInfoActivity extends AppCompatActivity implements OnClickLis
         // Demonically SHOW button
         // Show only for my ads
         // By default this button in invisible
-    //    if (isMyAd) {
+        if (isMyAd) {
             // SHOW the button
-       //     mapInfoButton.setVisibility(View.VISIBLE);
-      //  }
+            mapInfoButton.setVisibility(View.VISIBLE);
+        }
     }
 
 
@@ -137,28 +138,17 @@ public class ContactInfoActivity extends AppCompatActivity implements OnClickLis
         // Create the AlertDialog object and return it
         message = builder.create();
 
-       /* switch (selected.getId()) {
-            case R.id.facebook_button: {
-                message.show();
-                break;
-            }
-            case R.id.twitter_button: {
-                message.show();
-                break;
-            }
-            case R.id.linkedin_button: {
-                message.show();
-                break;
-            }
+       switch (selected.getId()) {
+
             case R.id.nfcConnect: {
                 Intent intent = new Intent(ContactInfoActivity.this, NfcTagWriterActivity.class);
-                // Format here is [contact_name]|[phone_number]|[ad_title]|[ad_description]|[image_url]
-                intent.putExtra("AD_Info",c.getString(1)+"|"+ c.getString(4) + "|" + c.getString(0) + "|" +c.getString(2)+"|"+c.getString(3));
+                // Format here is [contact_name]|[phone_number]|[ad_title]|[ad_description]||[ad_objectID][image_url]
+                intent.putExtra("AD_Info",c.getString(1)+"|"+ c.getString(4) + "|" + c.getString(0) + "|" +c.getString(2)+"|"+c.getString(7)+"|"+c.getString(3));
                 startActivityForResult(intent, 0);
                 break;
             }
 
-        }*/
+        }
     }
 
         @Override
