@@ -11,11 +11,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.Gravity;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import org.ndeftools.Message;
-import org.ndeftools.externaltype.AndroidApplicationRecord;
 import org.ndeftools.wellknown.TextRecord;
 
 import java.nio.charset.Charset;
@@ -33,7 +31,7 @@ public class NfcTagWriterActivity extends org.ndeftools.util.activity.NfcTagWrit
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_nfcwriter);
+        setContentView(R.layout.activity_nfc_tag_writer);
 
         // check to see if NFC is enabled on the device
         NfcAdapter mNfcAdapter= android.nfc.NfcAdapter.getDefaultAdapter(this);
@@ -68,7 +66,7 @@ public class NfcTagWriterActivity extends org.ndeftools.util.activity.NfcTagWrit
 
         Intent intent = getIntent();
         adInfo = intent.getStringExtra("AD_Info");
-        Toast.makeText(getApplicationContext(), "Title:"+ adInfo, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), "Title:"+ adInfo, Toast.LENGTH_SHORT).show();
         setDetecting(true);
 
     }

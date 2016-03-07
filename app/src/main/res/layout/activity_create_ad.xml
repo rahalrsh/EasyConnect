@@ -171,7 +171,7 @@
                     android:layout_gravity="center_horizontal"
                     android:ems="10"
                     android:inputType="textPersonName"
-                    android:text="http://www.bestbuy.ca/multimedia/Products/500x500/103/10399/10399242.jpg" />
+                    android:text="" />
 
             </LinearLayout>
 

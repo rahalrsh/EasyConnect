@@ -28,11 +28,6 @@ public class ContactInfoActivity extends AppCompatActivity implements OnClickLis
     ImageView ad_pic;
     String object_id;
 
-    //TODO: integrate social media
-  //  ImageView TwitterButton;
-   // ImageView LinkedInButton;
-  //  ImageView FacebookButton;
-
     DBHandler dbHandler;
     Cursor c;
 
@@ -53,9 +48,13 @@ public class ContactInfoActivity extends AppCompatActivity implements OnClickLis
         Toast.makeText(getApplicationContext(), "Title:"+ c.getString(0), Toast.LENGTH_SHORT).show();
 
 
-        // moving nfc to detailed contact page
-        FloatingActionButton nfcConnect = (FloatingActionButton) findViewById(R.id.nfcConnect);
-        nfcConnect.setOnClickListener(this);
+        // moving nfc tag programming page
+        FloatingActionButton nfcTag = (FloatingActionButton) findViewById(R.id.nfcTag);
+        nfcTag.setOnClickListener(this);
+
+        // moving nfc beam programming page
+        FloatingActionButton nfcBeam = (FloatingActionButton) findViewById(R.id.nfcBeam);
+        nfcBeam.setOnClickListener(this);
 
         // initialize all User Info
         contact_name = (TextView) findViewById(R.id.ad_title);
@@ -74,17 +73,6 @@ public class ContactInfoActivity extends AppCompatActivity implements OnClickLis
         ad_pic = (ImageView) findViewById(R.id.ad_pic);
         ad_pic.setImageBitmap(dbHandler.getImage(c.getBlob(6)));
 
-        //Initialize links
-        // FacebookButton = (ImageView) findViewById(R.id.facebook_button);
-    //    FacebookButton.setOnClickListener(this);
-
-
-        //TwitterButton = (ImageView) findViewById(R.id.twitter_button);
-    //    TwitterButton.setOnClickListener(this);
-
-
-        //LinkedInButton = (ImageView) findViewById(R.id.linkedin_button);
-      //  LinkedInButton.setOnClickListener(this);
         dbHandler.close();
 
 
@@ -143,16 +131,24 @@ public class ContactInfoActivity extends AppCompatActivity implements OnClickLis
         // Create the AlertDialog object and return it
         message = builder.create();
 
+
        switch (selected.getId()) {
 
-            case R.id.nfcConnect: {
+            case R.id.nfcTag: {
                 Intent intent = new Intent(ContactInfoActivity.this, NfcTagWriterActivity.class);
                 // Format here is [contact_name]|[phone_number]|[ad_title]|[ad_description]||[ad_objectID][image_url]
-                intent.putExtra("AD_Info",c.getString(1)+"|"+ c.getString(4) + "|" + c.getString(0) + "|" +c.getString(2)+"|"+c.getString(7)+"|"+c.getString(3));
+                intent.putExtra("AD_Info", c.getString(1) + "|" + c.getString(4) + "|" + c.getString(0) + "|" + c.getString(2) + "|" + c.getString(7) + "|" + c.getString(3));
                 startActivityForResult(intent, 0);
                 break;
             }
 
+           case R.id.nfcBeam: {
+               Intent intent = new Intent(ContactInfoActivity.this, NfcBeamWriterActivity.class);
+               // Format here is [contact_name]|[phone_number]|[ad_title]|[ad_description]||[ad_objectID][image_url]
+               intent.putExtra("AD_Info", c.getString(1) + "|" + c.getString(4) + "|" + c.getString(0) + "|" + c.getString(2) + "|" + c.getString(7) + "|" + c.getString(3));
+               startActivityForResult(intent, 0);
+               break;
+           }
         }
     }
 

@@ -10,17 +10,21 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin">
 
+
+
 <android.support.design.widget.FloatingActionButton
-    android:id="@+id/nfcConnect"
+    android:id="@+id/nfcTag"
     android:layout_width="64dip"
     android:layout_height="64dip"
     circle:backgroundTint="#009688"
     android:layout_gravity="center_horizontal|bottom|right"
-    android:src="@drawable/find_person_icon"
+    android:src="@drawable/nfc_tag_icon"
     android:layout_row="2"
     android:layout_column="0"
     android:layout_alignEnd="@+id/gridLayout"
     android:layout_alignBottom="@+id/gridLayout" />
+
+
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/mapInfo"
@@ -135,6 +139,16 @@
                 android:layout_marginBottom="10dp"
                 android:drawableBottom="@android:color/black"
                 android:layout_marginLeft="10dp" />
+
+            <!-- Motaz  can you add this bitton to this page (make sure it shows up) -->
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/nfcBeam"
+                android:layout_width="64dip"
+                android:layout_height="64dip"
+                circle:backgroundTint="#009688"
+                android:layout_gravity="center_horizontal|bottom|right"
+                android:src="@drawable/nfc_beam_icon"
+                />
 
             <TextView
                 android:layout_width="279dp"
