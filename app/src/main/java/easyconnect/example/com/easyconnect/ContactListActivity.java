@@ -127,7 +127,8 @@ public class ContactListActivity extends AppCompatActivity implements View.OnCli
                 int isMyAd = Integer.parseInt(c.getString(6));
 
                 if (isMyAd == 0) {
-                    DataObject obj = new DataObject(c.getString(1), c.getString(3), c.getLong(0), c.getString(4));
+                    // Title, Description, Ad id (in local databse), Image URL, Object ID (in Parse)
+                    DataObject obj = new DataObject(c.getString(1), c.getString(3), c.getLong(0), c.getString(4), c.getString(8));
                     results.add(index, obj);
                     index++;
                 }

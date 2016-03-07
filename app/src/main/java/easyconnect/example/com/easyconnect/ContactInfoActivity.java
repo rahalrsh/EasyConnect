@@ -26,6 +26,7 @@ public class ContactInfoActivity extends AppCompatActivity implements OnClickLis
     TextView ad_description;
     TextView phone_number;
     ImageView ad_pic;
+    String object_id;
 
     //TODO: integrate social media
   //  ImageView TwitterButton;
@@ -93,17 +94,21 @@ public class ContactInfoActivity extends AppCompatActivity implements OnClickLis
             public void onClick(View v) {
                 Log.i("map button", "show map");
                 Intent intent = new Intent(getApplication(), MapActivity.class);
+                // Put the parse db object ID
+                // In map activity use this parse db object id to read all the location information available for this ad
+                intent.putExtra("Object_ID", object_id);
                 startActivity(intent);
 
             }
         });
 
-        // Demonically SHOW button
+        // Demonically SHOW button and read parse db Object ID
         // Show only for my ads
         // By default this button in invisible
         if (isMyAd) {
             // SHOW the button
             mapInfoButton.setVisibility(View.VISIBLE);
+            object_id = intent.getStringExtra("Object_ID");
         }
     }
 

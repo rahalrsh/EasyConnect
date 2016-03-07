@@ -1,7 +1,5 @@
 package easyconnect.example.com.easyconnect;
 
-import android.widget.ImageView;
-
 /**
  * Created by nisalperera on 15-09-05.
  *
@@ -13,12 +11,14 @@ public class DataObject {
     private String mText2;
     private Long ad_id;
     private String imageURL;
+    private String object_id;
 
-    DataObject(String text1, String text2 , Long id, String URL){
+    DataObject(String text1, String text2 , Long id, String URL, String objid){
         mText1 = text1;
         mText2 = text2;
         ad_id = id;
         imageURL = URL;
+        object_id = objid;
 
     }
 
@@ -41,4 +41,6 @@ public class DataObject {
     }
 
     public String getImageURL() { return imageURL;}
+
+    public String getObjectID() { return object_id;}
 }

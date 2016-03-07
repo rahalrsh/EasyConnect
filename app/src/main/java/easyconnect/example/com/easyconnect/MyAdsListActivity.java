@@ -92,8 +92,12 @@ public class MyAdsListActivity extends AppCompatActivity implements View.OnClick
                 Intent intent = new Intent(MyAdsListActivity.this, ContactInfoActivity.class);
                 // put the dummy contact info as an extra field
                 DataObject cur = (DataObject) results.get(position);
+                // This is an ad made by user
                 intent.putExtra("myAd", true);
+                // Put local db Ad id
                 intent.putExtra("AD_ID", cur.getadId());
+                // Put the parse db Object ID
+                intent.putExtra("Object_ID", cur.getObjectID());
                 startActivity(intent);
             }
         });
@@ -121,7 +125,8 @@ public class MyAdsListActivity extends AppCompatActivity implements View.OnClick
 
                 // Only add my ads
                 if (isMyAd == 1) {
-                    DataObject obj = new DataObject(c.getString(1), c.getString(3), c.getLong(0), c.getString(4));
+                    // Title, Description, Ad id (in local databse), Image URL, Object ID (in Parse)
+                    DataObject obj = new DataObject(c.getString(1), c.getString(3), c.getLong(0), c.getString(4), c.getString(8));
                     results.add(index, obj);
                     index++;
                 }
