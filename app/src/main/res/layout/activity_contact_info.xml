@@ -25,15 +25,23 @@
     android:layout_alignBottom="@+id/gridLayout" />
 
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/nfcBeam"
+        android:layout_width="64dip"
+        android:layout_height="64dip"
+        circle:backgroundTint="#009688"
+        android:layout_gravity="center_horizontal|bottom"
+        android:src="@drawable/nfc_beam_icon"
+        />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/mapInfo"
         android:layout_width="64dip"
         android:layout_height="64dip"
         circle:backgroundTint="#009688"
-        android:layout_gravity="right|top"
+        android:layout_gravity="bottom|left"
         android:src="@drawable/map_icon"
-        android:visibility="invisible"
+        android:visibility="visible"
         android:layout_alignParentEnd="true" />
 
     <ScrollView
@@ -41,7 +49,8 @@
     xmlns:circle="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:overScrollMode="never">
+    android:overScrollMode="never"
+        android:layout_gravity="right|bottom">
     <!-- Here you put the rest of your current view-->
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
@@ -141,14 +150,6 @@
                 android:layout_marginLeft="10dp" />
 
             <!-- Motaz  can you add this bitton to this page (make sure it shows up) -->
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/nfcBeam"
-                android:layout_width="64dip"
-                android:layout_height="64dip"
-                circle:backgroundTint="#009688"
-                android:layout_gravity="center_horizontal|bottom|right"
-                android:src="@drawable/nfc_beam_icon"
-                />
 
             <TextView
                 android:layout_width="279dp"
