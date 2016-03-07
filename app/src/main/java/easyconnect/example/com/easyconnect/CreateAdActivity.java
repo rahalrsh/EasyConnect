@@ -192,9 +192,27 @@ public class CreateAdActivity extends AppCompatActivity implements View.OnClickL
 
                 // Do the following if you are creating an ad
                 if(isMyAd == 1) {
-                    adimagetobitmap();
                     // Create the ParseFile
-                    ParseFile file = new ParseFile("adpic.jpg", image);
+                    ParseFile file;
+                    if(image != null){
+                        file = new ParseFile("adpic.jpg", image);
+                    }
+                    else{
+                        // changing adImage to a BitMap
+                        adImage.setDrawingCacheEnabled(true);
+                        adImage.buildDrawingCache();
+                        Bitmap bitmap = adImage.getDrawingCache();
+
+                        //changing bitmap to a Byte stream and then byte array
+                        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                        // Compress image to lower quality scale 1 - 100
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 20, stream);
+                        //changing image to a Byte stream
+                        image = dbHandler.getBytes(bitmap);
+                        file = new ParseFile("adpic.jpg", image);
+
+                    }
+
                     // Upload the Default image into Parse Cloud
                     try {
                         file.save();
@@ -251,7 +269,6 @@ public class CreateAdActivity extends AppCompatActivity implements View.OnClickL
 
                     RetrieveParseObjects(objectID);
 
-                    adimagetobitmap();
 
                     Log.i("Loc", "collect ad: objectID="+ objectID);
                     rowID = dbHandler.insertAd(Title, Name, Details, ImageUrl, phone, isMyAd,image,objectID);
@@ -299,8 +316,8 @@ public class CreateAdActivity extends AppCompatActivity implements View.OnClickL
                 // Convert it to byte
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 // Compress image to lower quality scale 1 - 100
-                //bitmap.compress(Bitmap.CompressFormat.JPEG, 20, stream);
-                //image = stream.toByteArray();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 20, stream);
+                image = stream.toByteArray();
                 //Bharath how do I uncompress
                 adImage.setImageBitmap(bitmap);
 
@@ -362,19 +379,6 @@ public class CreateAdActivity extends AppCompatActivity implements View.OnClickL
         }
         // this is our fallback here
         return uri.getPath();
-    }
-    private void adimagetobitmap() {
-        // changing adImage to a BitMap
-        adImage.setDrawingCacheEnabled(true);
-        adImage.buildDrawingCache();
-        Bitmap bitmap = adImage.getDrawingCache();
-
-        //changing bitmap to a Byte stream and then byte array
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        // Compress image to lower quality scale 1 - 100
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 20, stream);
-        //changing image to a Byte stream
-        image = dbHandler.getBytes(bitmap);
     }
 
     private Bitmap getBitmapFromUri(Uri uri) throws IOException {
