@@ -176,8 +176,13 @@
                 android:layout_marginBottom="10dp"
                 android:layout_marginLeft="10dp" />
 
-        </GridLayout>
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="100dp">
+            </View>
 
+
+        </GridLayout>
 
     </RelativeLayout>
 
