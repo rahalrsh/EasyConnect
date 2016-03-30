@@ -86,7 +86,8 @@ public class DBHandler {
 
         // convert from byte array to bitmap
         public static Bitmap getImage(byte[] image) {
-            return BitmapFactory.decodeByteArray(image, 0, image.length);
+            int len = image.length;
+            return BitmapFactory.decodeByteArray(image, 0, len);
         }
 
     // Method for opening database

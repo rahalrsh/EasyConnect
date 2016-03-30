@@ -8,16 +8,17 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Button;
-import android.util.Log;
 
+import com.squareup.picasso.Picasso;
 
 
 public class ContactInfoActivity extends AppCompatActivity implements OnClickListener {
@@ -71,7 +72,14 @@ public class ContactInfoActivity extends AppCompatActivity implements OnClickLis
 
         //sets ad image to image that has been saved to sql database
         ad_pic = (ImageView) findViewById(R.id.ad_pic);
-        ad_pic.setImageBitmap(dbHandler.getImage(c.getBlob(6)));
+        byte[] image = c.getBlob(6);
+        Log.i("URL 5", c.getString(3));
+
+        /*
+        if (image != null){
+            ad_pic.setImageBitmap(dbHandler.getImage(image));
+        }*/
+        Picasso.with(getApplicationContext()).load( c.getString(3) ).into(ad_pic);
 
         dbHandler.close();
 

@@ -76,14 +76,17 @@ public class UserLocation {
 
     public static Double getLatitude(){
         if(location==null){
-            return null;
+            //return null;
+            latitude = 42.6596184;
+
         }
         return latitude;
     }
 
     public static Double getLongitude(){
         if(location==null){
-            return null;
+            // return null;
+            longitude = -80.3952102;
         }
         return longitude;
     }
