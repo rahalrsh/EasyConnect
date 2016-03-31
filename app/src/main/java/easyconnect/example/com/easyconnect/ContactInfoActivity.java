@@ -104,6 +104,7 @@ public class ContactInfoActivity extends AppCompatActivity implements OnClickLis
         if (isMyAd) {
             // SHOW the button
             mapInfoButton.setVisibility(View.VISIBLE);
+            nfcTag.setVisibility(View.VISIBLE);
             object_id = intent.getStringExtra("Object_ID");
         }
     }
